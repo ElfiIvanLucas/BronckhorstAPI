@@ -428,19 +428,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ivan_\\.nuget\\packages\\": {}
+    "C:\\Users\\ivanf\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivan_\\Documents\\0. Website tandarts\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj",
+      "projectUniqueName": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj",
       "projectName": "BronckhorstAPI",
-      "projectPath": "C:\\Users\\ivan_\\Documents\\0. Website tandarts\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj",
-      "packagesPath": "C:\\Users\\ivan_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivan_\\Documents\\0. Website tandarts\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\obj\\",
+      "projectPath": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj",
+      "packagesPath": "C:\\Users\\ivanf\\.nuget\\packages\\",
+      "outputPath": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ivan_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ivanf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -465,7 +470,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -495,7 +501,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

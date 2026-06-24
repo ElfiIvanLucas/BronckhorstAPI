@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI", "BronckhorstAPI\BronckhorstAPI.csproj", "{C0723E85-F835-46A8-9BB4-BE9BE3A11517}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C0723E85-F835-46A8-9BB4-BE9BE3A11517}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0723E85-F835-46A8-9BB4-BE9BE3A11517}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0723E85-F835-46A8-9BB4-BE9BE3A11517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

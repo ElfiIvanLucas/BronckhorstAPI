@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj": {}
+    "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj": {
+    "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj",
-        "projectName": "BronckhorstAPI",
-        "projectPath": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI.csproj",
+        "projectUniqueName": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\ivanf\\.nuget\\packages\\",
-        "outputPath": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\BronckhorstAPI\\obj\\",
+        "outputPath": "D:\\Data\\BronckhorstAPI\\BronckhorstAPI\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,12 +49,6 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.4.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -67,9 +61,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
