@@ -1,0 +1,6 @@
+@BronckhorstAPI_HostAddress = http://localhost:5180
+
+GET {{BronckhorstAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
