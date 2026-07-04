@@ -1,0 +1,6 @@
+@DatabaseCodeFirst_HostAddress = http://localhost:5002
+
+GET {{DatabaseCodeFirst_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

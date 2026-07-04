@@ -2,6 +2,7 @@
 {
     public class Bronckhorst
     {
-        public String MyProperty { get; set; }
+        public String MyProperty { get; set;   }
+
     }
 }

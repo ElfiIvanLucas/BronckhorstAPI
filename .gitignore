@@ -1,0 +1,40 @@
+# Build output
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+
+# .NET artifacts
+*.dll
+*.exe
+*.pdb
+*.cache
+*.binlog
+*.deps.json
+*.runtimeconfig.json
+
+# User and IDE files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Rider / ReSharper
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# Logs
+*.log
+
+# Publish output
+publish/
+wwwroot/dist/
+
+# Local settings and secrets
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
