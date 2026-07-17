@@ -30,5 +30,5 @@ public class CustomerOrder
 
     public OrderStatus Status { get; set; } = null!;
 
-    public ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
+    public ICollection<OrderLine> OrderLines { get; set; } = [];
 }

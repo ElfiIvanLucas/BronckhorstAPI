@@ -6,5 +6,5 @@ public class OrderStatus
 
     public string Name { get; set; } = null!;
 
-    public ICollection<CustomerOrder> Orders { get; set; } = new List<CustomerOrder>();
+    public ICollection<CustomerOrder> Orders { get; set; } = [];
 }

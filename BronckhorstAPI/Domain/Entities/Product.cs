@@ -10,15 +10,13 @@ public class Product
 
     public string Name { get; set; } = null!;
 
-    public string NameTranslation { get; set; } = null!;
-
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
 
     public decimal Price { get; set; }
 
     public Brand Brand { get; set; } = null!;
 
-    public ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
+    public ICollection<OrderLine> OrderLines { get; set; } = [];
 
-    public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+    public ICollection<ProductCategory> ProductCategories { get; set; } = [];
 }

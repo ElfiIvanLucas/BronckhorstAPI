@@ -4,13 +4,15 @@ public class Category
 {
     public int Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
-    public int ParentId { get; set; }
+    public string? TranslatedName { get; set; } = null;
+
+    public int? ParentId { get; set; }
 
     public Category Parent { get; set; } = null!;
 
-    public ICollection<Category> Children { get; set; } = new List<Category>();
+    public ICollection<Category> Children { get; set; } = [];
 
-    public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+    public ICollection<ProductCategory> ProductCategories { get; set; } = [];
 }

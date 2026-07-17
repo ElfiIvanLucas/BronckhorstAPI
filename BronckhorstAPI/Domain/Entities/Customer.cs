@@ -20,7 +20,7 @@ public class Customer
 
     public Account Account { get; set; } = null!;
 
-    public ICollection<Address> Addresses { get; set; } = new List<Address>();
+    public ICollection<Address> Addresses { get; set; } = [];
 
-    public ICollection<CustomerOrder> Orders { get; set; } = new List<CustomerOrder>();
+    public ICollection<CustomerOrder> Orders { get; set; } = [];
 }
