@@ -20,7 +20,6 @@ public static class ServiceCollectionExtension
             options.UseSqlServer(configuration.GetConnectionString("BronckhorstConnection"));
         });
         
-        
         services.AddTransient<IRepository<Product>, ProductRepository>();
         services.AddTransient<IProductService, ProductService>();
         services.AddTransient<IMapper<Product, ProductDto>, ProductMapper>();
