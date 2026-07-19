@@ -1,17 +1,65 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using BronckhorstAPI.Services.Interfaces;
 
 namespace BronckhorstAPI.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly IProductService _productService;
+        
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
+        
         [HttpGet]
         [Route("GetStatus")]
         public IActionResult GetStatus()
         {
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetProducts")]
+        public async Task<IActionResult?> GetProducts()
+        {
+            try
+            {
+                var result = await _productService.GetAllProducts();
+
+                if (result.Count != 0)
+                {
+                    return Ok(result);
+                }
+                
+                return NotFound();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetProductById/{id}")]
+        public async Task<IActionResult?> GetProductById(int id)
+        {
+            try
+            {
+                var result = await _productService.GetProductById(id);
+                
+                return Ok(result);
+            }
+            catch (ArgumentException exception)
+            {
+                return BadRequest(exception.Message);
+            }
+            catch (Exception exception)
+            {
+                return StatusCode(500, exception.Message);
+            }
         }
     }
 }
