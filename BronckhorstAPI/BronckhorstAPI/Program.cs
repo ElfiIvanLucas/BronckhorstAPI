@@ -1,28 +1,11 @@
-using BronckhorstAPI.DTO;
-using BronckhorstAPI.Mappers;
-using BronckhorstAPI.Mappers.Interfaces;
-using BronckhorstAPI.Services;
-using BronckhorstAPI.Services.Interfaces;
-using Domain.Entities;
-using Persistence;
-using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories;
-using Persistence.Repositories.Interfaces;
+using BronckhorstAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<BronckhorstDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BronckhorstConnection"));
-});
-
-builder.Services.AddTransient<IRepository<Product>, ProductRepository>();
-builder.Services.AddTransient<IProductService, ProductService>();
-builder.Services.AddTransient<IMapper<Product, ProductDto>, ProductMapper>();
+builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 
