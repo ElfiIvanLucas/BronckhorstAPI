@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF1B5BDC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI.Tests", "BronckhorstAPI.Tests\BronckhorstAPI.Tests.csproj", "{2B41299F-59F0-4098-8C5C-7026AFC38828}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Tests", "Persistence.Tests\Persistence.Tests.csproj", "{BE8EBA15-F6F0-4BA8-84C9-AFF024976742}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{2B41299F-59F0-4098-8C5C-7026AFC38828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B41299F-59F0-4098-8C5C-7026AFC38828}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B41299F-59F0-4098-8C5C-7026AFC38828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE8EBA15-F6F0-4BA8-84C9-AFF024976742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8EBA15-F6F0-4BA8-84C9-AFF024976742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8EBA15-F6F0-4BA8-84C9-AFF024976742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8EBA15-F6F0-4BA8-84C9-AFF024976742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +50,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2B41299F-59F0-4098-8C5C-7026AFC38828} = {DF1B5BDC-0F58-4DF6-90D0-5704F6A9FE1F}
+		{BE8EBA15-F6F0-4BA8-84C9-AFF024976742} = {DF1B5BDC-0F58-4DF6-90D0-5704F6A9FE1F}
 	EndGlobalSection
 EndGlobal

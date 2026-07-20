@@ -10,7 +10,7 @@ public class ProductRepository : IRepository<Product>
     
     public ProductRepository(BronckhorstDbContext context)
     {
-        _context = context;
+        _context = context ?? throw new ArgumentNullException(nameof(context));
     }
     
     public Task<List<Product>> GetAllAsync()
