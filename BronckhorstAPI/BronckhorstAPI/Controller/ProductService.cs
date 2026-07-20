@@ -5,11 +5,11 @@ namespace BronckhorstAPI.Controller
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductService : ControllerBase
     {
         private readonly IProductService _productService;
         
-        public ProductController(IProductService productService)
+        public ProductService(IProductService productService)
         {
             _productService = productService;
         }
@@ -27,7 +27,7 @@ namespace BronckhorstAPI.Controller
         {
             try
             {
-                var result = await _productService.GetAllProducts();
+                var result = await _productService.GetAllProductsAsync();
 
                 if (result.Count != 0)
                 {
@@ -48,7 +48,7 @@ namespace BronckhorstAPI.Controller
         {
             try
             {
-                var result = await _productService.GetProductById(id);
+                var result = await _productService.GetProductByIdAsync(id);
                 
                 return Ok(result);
             }

@@ -17,14 +17,14 @@ public class ProductService : IProductService
         _productMapper = productMapper ?? throw new ArgumentNullException(nameof(productMapper));
     }
     
-    public async Task<List<ProductDto>> GetAllProducts()
+    public async Task<List<ProductDto>> GetAllProductsAsync()
     {
         var productEntities = await _productRepository.GetAllAsync();
         
         return productEntities.Select(_productMapper.MapToDto).ToList();
     }
 
-    public async Task<ProductDto> GetProductById(int id)
+    public async Task<ProductDto> GetProductByIdAsync(int id)
     {
         var productEntity = await _productRepository.GetByIdAsync(id);
         

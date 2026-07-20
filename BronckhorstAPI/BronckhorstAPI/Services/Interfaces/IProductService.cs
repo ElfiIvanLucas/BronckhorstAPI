@@ -4,7 +4,7 @@ namespace BronckhorstAPI.Services.Interfaces;
 
 public interface IProductService
 {
-    Task<List<ProductDto>> GetAllProducts();
+    Task<List<ProductDto>> GetAllProductsAsync();
     
-    Task<ProductDto> GetProductById(int id);
+    Task<ProductDto> GetProductByIdAsync(int id);
 }
