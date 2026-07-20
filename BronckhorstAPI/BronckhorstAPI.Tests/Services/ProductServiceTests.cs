@@ -6,7 +6,7 @@ using BronckhorstAPI.Tests.Helpers;
 using Domain.Entities;
 using Persistence.Repositories.Interfaces;
 
-namespace BronckhorstAPI.Tests.Controllers;
+namespace BronckhorstAPI.Tests.Services;
 
 public class ProductServiceTests
 {
@@ -35,7 +35,7 @@ public class ProductServiceTests
         // Arrange
         const int productId = 1;
         var expectedResult = ProductHelper.CreateProductDto();
-        _substituteProductRepository.GetByIdAsync(productId).Returns(ProductHelper.CreateProducEntity());
+        _substituteProductRepository.GetByIdAsync(productId).Returns(ProductHelper.CreateProductEntity());
         _substituteProductMapper.MapToDto(Arg.Any<Product>()).Returns(expectedResult);
         
         // Act

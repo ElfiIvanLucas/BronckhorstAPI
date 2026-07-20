@@ -1,5 +1,8 @@
-﻿namespace Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Domain.Entities;
+
+[ExcludeFromCodeCoverage]
 public class Brand
 {
     public int Id { get; set; }

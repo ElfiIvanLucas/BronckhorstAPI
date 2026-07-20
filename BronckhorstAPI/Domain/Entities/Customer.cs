@@ -1,5 +1,8 @@
-﻿namespace Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Domain.Entities;
+
+[ExcludeFromCodeCoverage]
 public class Customer
 {
     public int Id { get; set; }

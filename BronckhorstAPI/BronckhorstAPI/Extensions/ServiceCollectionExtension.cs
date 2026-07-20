@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using BronckhorstAPI.DTO;
 using BronckhorstAPI.Mappers;
 using BronckhorstAPI.Mappers.Interfaces;
@@ -11,6 +12,7 @@ using Persistence.Repositories.Interfaces;
 
 namespace BronckhorstAPI.Extensions;
 
+[ExcludeFromCodeCoverage]
 public static class ServiceCollectionExtension
 {
     public static void ConfigureServices(this IServiceCollection services,  IConfiguration configuration)

@@ -5,20 +5,13 @@ namespace BronckhorstAPI.Controller
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ProductService : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
         
-        public ProductService(IProductService productService)
+        public ProductController(IProductService productService)
         {
-            _productService = productService;
-        }
-        
-        [HttpGet]
-        [Route("GetStatus")]
-        public IActionResult GetStatus()
-        {
-            return Ok();
+            _productService = productService ??  throw new ArgumentNullException(nameof(productService));
         }
 
         [HttpGet]
@@ -38,7 +31,7 @@ namespace BronckhorstAPI.Controller
             }
             catch (Exception exception)
             {
-                return BadRequest(exception.Message);
+                return StatusCode(500, exception.Message);
             }
         }
 

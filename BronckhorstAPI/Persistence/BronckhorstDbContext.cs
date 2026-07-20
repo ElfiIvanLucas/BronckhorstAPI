@@ -1,8 +1,10 @@
-﻿using Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
+    [ExcludeFromCodeCoverage]
     public class BronckhorstDbContext : DbContext
     {
         public BronckhorstDbContext(DbContextOptions<BronckhorstDbContext> options) : base(options) { }

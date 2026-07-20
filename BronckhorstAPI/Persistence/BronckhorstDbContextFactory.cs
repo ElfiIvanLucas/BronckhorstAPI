@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace Persistence;
 
+[ExcludeFromCodeCoverage]
 public class BronckhorstDbContextFactory : IDesignTimeDbContextFactory<BronckhorstDbContext>
 {
     public BronckhorstDbContext CreateDbContext(string[] args)

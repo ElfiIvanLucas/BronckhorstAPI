@@ -15,7 +15,7 @@ public static class ProductHelper
             Price = 100
         };
     
-    public static Product CreateProducEntity()
+    public static Product CreateProductEntity()
         => new()
         {
             Id = 1,
