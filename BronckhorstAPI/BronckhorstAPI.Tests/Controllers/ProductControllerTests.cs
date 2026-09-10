@@ -108,7 +108,7 @@ public class ProductControllerTests
     }
 
     [Fact]
-    public async Task TestGetProducts_InternalServerError_ReturnsOkResult()
+    public async Task TestGetProducts_InternalServerError_ReturnsStatusCode500()
     {
         // Arrange
         _productService.GetAllProductsAsync().ThrowsAsync(new Exception());
