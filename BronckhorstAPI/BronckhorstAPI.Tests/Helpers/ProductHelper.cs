@@ -14,7 +14,7 @@ public static class ProductHelper
             Description = "Description for Product 1",
             Price = 100
         };
-    
+
     public static Product CreateProductEntity()
         => new()
         {
@@ -24,9 +24,10 @@ public static class ProductHelper
             Description = "Description for Product 1",
             Price = 100
         };
-    
+
     public static List<Product> CreateProductEntities()
-        => [
+        =>
+        [
             new()
             {
                 Id = 1,
@@ -36,9 +37,10 @@ public static class ProductHelper
                 Price = 100
             }
         ];
-    
+
     public static List<ProductDto> CreateProductDtos()
-        => [
+        =>
+        [
             new()
             {
                 Id = 1,

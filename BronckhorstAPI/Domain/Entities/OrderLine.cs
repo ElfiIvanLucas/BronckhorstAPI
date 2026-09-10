@@ -15,7 +15,7 @@ public class OrderLine
 
     public decimal ProductPriceSnapshot { get; set; }
 
-    public string ProductNameSnapshot { get; set; } = null!;
+    public string ProductNameSnapshot { get; set; } = string.Empty;
 
     public CustomerOrder Order { get; set; } = null!;
 

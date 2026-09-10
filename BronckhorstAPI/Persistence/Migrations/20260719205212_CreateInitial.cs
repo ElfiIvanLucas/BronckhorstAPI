@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage] 
     public partial class CreateInitial : Migration
     {
         /// <inheritdoc />

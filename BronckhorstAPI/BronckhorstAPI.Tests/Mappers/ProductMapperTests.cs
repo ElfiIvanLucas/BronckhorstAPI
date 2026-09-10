@@ -24,7 +24,7 @@ public class ProductMapperTests
 
         // Act
         var result = _productDtoMapper.MapToDto(productEntity);
-        
+
         // Assert
         Assert.Equivalent(expectedProductDtoResult, result);
     }

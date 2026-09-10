@@ -7,8 +7,8 @@ public class Account
 {
     public int Id { get; set; }
 
-    public string Email { get; set; } = null!;
-    public string PasswordHash { get; set; } = null!;
+    public string Email { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
 
     public DateTime PasswordChangedAt { get; set; }
 
@@ -22,5 +22,5 @@ public class Account
 
     public DateTime? LastLoginAt { get; set; }
 
-    public Customer Customer { get; set; } = null!;
+    public Customer Customer { get; set; } = null!; 
 }

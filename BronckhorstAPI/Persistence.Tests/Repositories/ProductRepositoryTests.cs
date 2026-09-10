@@ -14,7 +14,7 @@ public class ProductRepositoryTests
         var context = DbContextHelper.CreateInMemoryDbContext();
         _productRepository = new ProductRepository(context);
     }
-    
+
     [Fact]
     public void TestConstructor_NullArguments_ShouldThrowArgumentNullException()
     {
@@ -26,10 +26,10 @@ public class ProductRepositoryTests
     {
         // Arrange
         var expectedResult = DbContextHelper.CreateProductEntities();
-        
+
         // Act
         var result = await _productRepository.GetAllAsync();
-        
+
         // Assert
         Assert.Equivalent(expectedResult, result);
     }
@@ -40,20 +40,20 @@ public class ProductRepositoryTests
         // Arrange
         const int id = 1;
         var expectedResult = DbContextHelper.CreateProductEntities().FirstOrDefault(p => p.Id == id);
-        
+
         // Act
         var result = await _productRepository.GetByIdAsync(id);
-        
+
         // Assert
         Assert.Equivalent(expectedResult, result);
     }
-    
+
     [Fact]
     public async Task TestGetByIdAsync_UnknownId_ThrowsArgumentException()
     {
         // Arrange
         const int id = 999;
-        
+
         // Act && Assert
         await Assert.ThrowsAsync<ArgumentException>(() => _productRepository.GetByIdAsync(id));
     }

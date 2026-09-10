@@ -11,7 +11,7 @@ using Persistence;
 
 namespace Persistence.Migrations
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage] 
     [DbContext(typeof(BronckhorstDbContext))]
     partial class BronckhorstDbContextModelSnapshot : ModelSnapshot
     {

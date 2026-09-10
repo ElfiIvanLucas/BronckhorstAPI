@@ -15,13 +15,13 @@ namespace BronckhorstAPI.Extensions;
 [ExcludeFromCodeCoverage]
 public static class ServiceCollectionExtension
 {
-    public static void ConfigureServices(this IServiceCollection services,  IConfiguration configuration)
+    public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<BronckhorstDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("BronckhorstConnection"));
         });
-        
+
         services.AddTransient<IRepository<Product>, ProductRepository>();
         services.AddTransient<IProductService, ProductService>();
         services.AddTransient<IMapper<Product, ProductDto>, ProductMapper>();

@@ -10,11 +10,11 @@ public static class DbContextHelper
         var options = new DbContextOptionsBuilder<BronckhorstDbContext>()
             .UseInMemoryDatabase("Bronckhorst")
             .Options;
-        
+
         var context = new BronckhorstDbContext(options);
-        
+
         AddProducts(context);
-        
+
         return context;
     }
 
@@ -24,9 +24,10 @@ public static class DbContextHelper
         context.Products.AddRange(CreateProductEntities());
         context.SaveChanges();
     }
-    
+
     public static List<Product> CreateProductEntities()
-        => [
+        =>
+        [
             new()
             {
                 Id = 1,

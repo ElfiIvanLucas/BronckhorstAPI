@@ -10,8 +10,9 @@ public class BronckhorstDbContextFactory : IDesignTimeDbContextFactory<Bronckhor
     public BronckhorstDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<BronckhorstDbContext>();
-        optionsBuilder.UseSqlServer("Server=localhost;Database=Bronckhorst;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True");
+        optionsBuilder.UseSqlServer(
+            "Server=localhost;Database=Bronckhorst;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True");
 
         return new BronckhorstDbContext(optionsBuilder.Options);
     }
-}
+} 
