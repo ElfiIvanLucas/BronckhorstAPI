@@ -4,7 +4,7 @@ using Persistence.Repositories.Interfaces;
 
 namespace Persistence.Repositories;
 
-public class ProductRepository : IRepository<Product>
+public class ProductRepository : IProductRepository
 {
     private readonly BronckhorstDbContext _context;
 
@@ -15,6 +15,12 @@ public class ProductRepository : IRepository<Product>
 
     public Task<List<Product>> GetAllAsync()
         => _context.Products.ToListAsync();
+
+    public Task<List<Product>> GetByCategoryIdAsync(int categoryId)
+        => _context.Products
+            .Where(product =>
+                product.ProductCategories.Any(productCategory => productCategory.CategoryId == categoryId))
+            .ToListAsync();
 
     public async Task<Product> GetByIdAsync(int id)
     {

@@ -12,11 +12,11 @@ public class ProductServiceTests
 {
     private readonly IProductService _productService;
     private readonly IMapper<Product, ProductDto> _substituteProductMapper;
-    private readonly IRepository<Product> _substituteProductRepository;
+    private readonly IProductRepository _substituteProductRepository;
 
     public ProductServiceTests()
     {
-        _substituteProductRepository = Substitute.For<IRepository<Product>>();
+        _substituteProductRepository = Substitute.For<IProductRepository>();
         _substituteProductMapper = Substitute.For<IMapper<Product, ProductDto>>();
         _productService = new ProductService(_substituteProductRepository, _substituteProductMapper);
     }
@@ -62,5 +62,23 @@ public class ProductServiceTests
         Assert.Equivalent(expectedResult, result);
         _substituteProductMapper.Received(1).MapToDto(Arg.Any<Product>());
         await _substituteProductRepository.Received(1).GetByIdAsync(productId);
+    }
+
+    [Fact]
+    public async Task TestGetProductsByCategoryAsync_HasValues_ReturnsProductsForCategory()
+    {
+        // Arrange
+        const int categoryId = 1;
+        var expectedResult = new List<ProductDto> { ProductHelper.CreateProductDto() };
+        _substituteProductRepository.GetByCategoryIdAsync(categoryId).Returns(ProductHelper.CreateProductEntities());
+        _substituteProductMapper.MapToDto(Arg.Any<Product>()).Returns(ProductHelper.CreateProductDto());
+
+        // Act
+        var result = await _productService.GetProductsByCategoryAsync(categoryId);
+
+        // Assert
+        Assert.Equivalent(expectedResult, result);
+        _substituteProductMapper.Received(1).MapToDto(Arg.Any<Product>());
+        await _substituteProductRepository.Received(1).GetByCategoryIdAsync(categoryId);
     }
 }

@@ -9,9 +9,9 @@ namespace BronckhorstAPI.Services;
 public class ProductService : IProductService
 {
     private readonly IMapper<Product, ProductDto> _productMapper;
-    private readonly IRepository<Product> _productRepository;
+    private readonly IProductRepository _productRepository;
 
-    public ProductService(IRepository<Product> productRepository, IMapper<Product, ProductDto> productMapper)
+    public ProductService(IProductRepository productRepository, IMapper<Product, ProductDto> productMapper)
     {
         _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         _productMapper = productMapper ?? throw new ArgumentNullException(nameof(productMapper));
@@ -20,6 +20,13 @@ public class ProductService : IProductService
     public async Task<List<ProductDto>> GetAllProductsAsync()
     {
         var productEntities = await _productRepository.GetAllAsync();
+
+        return productEntities.Select(_productMapper.MapToDto).ToList();
+    }
+
+    public async Task<List<ProductDto>> GetProductsByCategoryAsync(int categoryId)
+    {
+        var productEntities = await _productRepository.GetByCategoryIdAsync(categoryId);
 
         return productEntities.Select(_productMapper.MapToDto).ToList();
     }

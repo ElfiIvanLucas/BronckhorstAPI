@@ -76,6 +76,70 @@ public class ProductControllerTests
     }
 
     [Fact]
+    public async Task TestGetProductsByCategory_HasNoProducts_ReturnsNotFoundResult()
+    {
+        // Arrange
+        const int categoryId = 1;
+        _productService.GetProductsByCategoryAsync(categoryId).Returns([]);
+
+        // Act
+        var result = await _productController.GetProductsByCategory(categoryId);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
+        await _productService.Received(1).GetProductsByCategoryAsync(categoryId);
+    }
+
+    [Fact]
+    public async Task TestGetProductsByCategory_HasProducts_ReturnsOkResult()
+    {
+        // Arrange
+        const int categoryId = 1;
+        var expectedProducts = new List<ProductDto> { ProductHelper.CreateProductDto() };
+        _productService.GetProductsByCategoryAsync(categoryId).Returns(expectedProducts);
+
+        // Act
+        var result = await _productController.GetProductsByCategory(categoryId);
+
+        // Assert
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        var actualProducts = Assert.IsType<List<ProductDto>>(okResult.Value);
+        Assert.Equivalent(expectedProducts, actualProducts);
+        await _productService.Received(1).GetProductsByCategoryAsync(categoryId);
+    }
+
+    [Fact]
+    public async Task TestGetProductsByCategory_InternalServerError_ReturnsStatusCode500()
+    {
+        // Arrange
+        const int categoryId = 1;
+        _productService.GetProductsByCategoryAsync(categoryId).ThrowsAsync(new Exception());
+
+        // Act
+        var result = await _productController.GetProductsByCategory(categoryId);
+
+        // Assert
+        var objectResult = Assert.IsType<ObjectResult>(result);
+        Assert.Equal(500, objectResult.StatusCode);
+        await _productService.Received(1).GetProductsByCategoryAsync(categoryId);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public async Task TestGetProductsByCategory_InvalidCategoryId_ReturnsBadRequest(int categoryId)
+    {
+        // Arrange
+
+        // Act
+        var result = await _productController.GetProductsByCategory(categoryId);
+
+        // Assert
+        Assert.IsType<BadRequestObjectResult>(result);
+        await _productService.DidNotReceive().GetProductsByCategoryAsync(Arg.Any<int>());
+    }
+
+    [Fact]
     public async Task TestGetProducts_HasNoProducts_ReturnsOkResult()
     {
         // Arrange

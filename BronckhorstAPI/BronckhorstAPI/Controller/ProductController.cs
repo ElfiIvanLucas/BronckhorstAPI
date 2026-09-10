@@ -1,4 +1,5 @@
-﻿using BronckhorstAPI.Services.Interfaces;
+﻿using BronckhorstAPI.DTO;
+using BronckhorstAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BronckhorstAPI.Controller;
@@ -16,6 +17,9 @@ public class ProductController : ControllerBase
 
     [HttpGet]
     [Route("GetProducts")]
+    [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult?> GetProducts()
     {
         try
@@ -36,7 +40,40 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
+    [Route("GetProductsByCategory/{categoryId:int}")]
+    [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult?> GetProductsByCategory(int categoryId)
+    {
+        if (categoryId <= 0)
+        {
+            return BadRequest("Category id must be greater than zero.");
+        }
+
+        try
+        {
+            var result = await _productService.GetProductsByCategoryAsync(categoryId);
+
+            if (result.Count != 0)
+            {
+                return Ok(result);
+            }
+
+            return NotFound();
+        }
+        catch (Exception exception)
+        {
+            return StatusCode(500, exception.Message);
+        }
+    }
+
+    [HttpGet]
     [Route("GetProductById/{id}")]
+    [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult?> GetProductById(int id)
     {
         try

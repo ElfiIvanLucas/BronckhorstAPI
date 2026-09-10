@@ -7,7 +7,7 @@ namespace Persistence.Tests.Repositories;
 
 public class ProductRepositoryTests
 {
-    private readonly IRepository<Product> _productRepository;
+    private readonly IProductRepository _productRepository;
 
     public ProductRepositoryTests()
     {
@@ -32,6 +32,29 @@ public class ProductRepositoryTests
 
         // Assert
         Assert.Equivalent(expectedResult, result);
+    }
+
+    [Fact]
+    public async Task TestGetByCategoryIdAsync_HasMatchingRecords_ReturnsMatchingRecords()
+    {
+        // Arrange
+        const int categoryId = 1;
+        var context = DbContextHelper.CreateInMemoryDbContext();
+        var matchingProduct = new Product { Id = 1, Name = "Matching product" };
+        var otherProduct = new Product { Id = 2, Name = "Other product" };
+        context.Products.AddRange(matchingProduct, otherProduct);
+        context.ProductCategories.AddRange(
+            new ProductCategory { ProductId = matchingProduct.Id, CategoryId = categoryId },
+            new ProductCategory { ProductId = otherProduct.Id, CategoryId = 2 });
+        await context.SaveChangesAsync();
+        var productRepository = new ProductRepository(context);
+
+        // Act
+        var result = await productRepository.GetByCategoryIdAsync(categoryId);
+
+        // Assert
+        var actualProduct = Assert.Single(result);
+        Assert.Equal(matchingProduct.Id, actualProduct.Id);
     }
 
     [Fact]
