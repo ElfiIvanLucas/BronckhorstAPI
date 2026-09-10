@@ -1,0 +1,198 @@
+@page
+@{
+    ViewData["Title"] = "Onze Producten";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/styles/product.css" />
+}
+
+<section id="navigation" class="ctg-nav">
+    <main class="categorie nav">
+        <div id="ctg-navigation-main-bar" class="ctg-navigation">
+            <button type="button" id="ctg-menu" class="cta ctg-menu" aria-label="Open categorieën" aria-haspopup="dialog" aria-controls="ctg-modal" aria-expanded="false">
+                <i data-feather="menu"></i>
+                <span>Categorieën</span>
+            </button>
+        </div>
+    </main>
+</section>
+
+<section id="producten" class="hero product ">
+    <main class="product">
+        <h1>IMPLANTATEN</h1>
+
+        <div class="implant-categorie">
+            <h2>Categorieën</h2>
+        </div>
+
+        <div class="product-grid">
+            <a class="product-card" href="#" aria-label="Vraag informatie aan over Prama Slim Power">
+                <div class="product-image">
+                    <img src="~/images/prama slim.png" alt="Prama Slim Power" />
+                </div>
+                <div class="product-content">
+                    <h3>- Prama Slim Power -</h3>
+                </div>
+            </a>
+
+            <a class="product-card" href="#" aria-label="Vraag informatie aan over Prama Power">
+                <div class="product-image">
+                    <img src="~/images/prama power.png" alt="Prama Power" />
+                </div>
+                <div class="product-content">
+                    <h4>- Prama Power -</h4>
+                </div>
+            </a>
+
+            <a class="product-card" href="#" aria-label="Vraag informatie aan over Prama RF-RF SL Power">
+                <div class="product-image">
+                    <img src="~/images/RF-RF SL.png" alt="rf-rf sl power" />
+                </div>
+                <div class="product-content">
+                    <h5>- Prama RF-RF SL Power -</h5>
+                </div>
+            </a>
+
+            <a class="product-card" asp-page="/Contact" aria-label="Vraag informatie aan over Prama Power Nasal & Pterygoid Implants">
+                <div class="product-image">
+                    <img src="~/images/prama nasal.png" alt="Prama Power Nasal & Pterygoid Implants" />
+                </div>
+                <div class="product-content">
+                    <h6>- Prama Power Nasal & Pterygoid Implants -</h6>
+                </div>
+            </a>
+        </div>
+    </main>
+</section>
+
+<div class="ctg-modal" id="ctg-modal" aria-hidden="true">
+    <div class="ctg-modal-panel" role="dialog" aria-modal="true" aria-label="Categorieën">
+        <button type="button" class="close-icon" id="ctg-modal-close" aria-label="Sluit categorieën">
+            <i data-feather="x"></i>
+        </button>
+        <aside class="ctg-modal-sidebar">
+            <a href="#" class="is-active" data-category="implantaten">Implantaten</a>
+            <a href="#" data-category="noxi">Noxi</a>
+            <a href="#" data-category="youse">Youse</a>
+            <a href="#" data-category="digitale-oplossingen">Digitale oplossingen</a>
+            <a href="#" data-category="assortiment">Assortiment</a>
+            <a href="#" data-category="service">Service</a>
+        </aside>
+        <div class="ctg-modal-content">
+            <section class="ctg-modal-pane is-active" data-category="implantaten">
+                <a asp-page="/OnzeProducten"><h2>Implantaten</h2></a>
+                <div class="ctg-modal-grid">
+                    <div class="ctg-modal-column">
+                        <h3>Prama Slim Power </h3>
+                        <a href="#">Short Neck h 1.80mm</a>
+                        <a href="#">Regular Neck h 2.80mm</a>
+                    </div>
+
+                    <div class="ctg-modal-column">
+                        <h3>Prama Power </h3>
+                        <a href="#">Short Neck h 1.80mm</a>
+                        <a href="#">Regular Neck h 2.80mm</a>
+                        <a href="#">Long Neck h 3.80mm</a>
+                    </div>
+
+                    <div class="ctg-modal-column">
+                        <h3>Prama RF-RF SL Power</h3>
+                        <a href="#">Prama RF Power LSS ⌀ 3.80 ⌀ 4.25</a>
+                        <a href="#">Optie 10</a>
+                        <a href="#">Optie 11</a>
+                        <a href="#">Optie 12</a>
+                    </div>
+
+                    <div class="ctg-modal-column">
+                        <h3>Prama Power Nasal & Pterygoid</h3>
+                        <a href="#">Optie 13</a>
+                        <a href="#">Optie 14</a>
+                        <a href="#">Optie 15</a>
+                        <a href="#">Optie 16</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ctg-modal-pane" data-category="noxi">
+                <h2>Noxi</h2>
+                <div class="ctg-modal-grid">
+                    <div class="ctg-modal-column">
+                        <h3>Noxi oplossingen</h3>
+                        <a href="#">Overzicht producten</a>
+                        <a href="#">Technische informatie</a>
+                    </div>
+                    <div class="ctg-modal-column">
+                        <h3>Ondersteuning</h3>
+                        <a href="#">Handleidingen</a>
+                        <a href="#">Contact opnemen</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ctg-modal-pane" data-category="youse">
+                <h2>Youse</h2>
+                <div class="ctg-modal-grid">
+                    <div class="ctg-modal-column">
+                        <h3>Youse collectie</h3>
+                        <a href="#">Productdetails</a>
+                        <a href="#">Toepassingen</a>
+                    </div>
+                    <div class="ctg-modal-column">
+                        <h3>Meer info</h3>
+                        <a href="#">Brochure aanvragen</a>
+                        <a href="#">Offerte aanvragen</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ctg-modal-pane" data-category="digitale-oplossingen">
+                <h2>Digitale oplossingen</h2>
+                <div class="ctg-modal-grid">
+                    <div class="ctg-modal-column">
+                        <h3>Digitale workflow</h3>
+                        <a href="#">Scannen en plannen</a>
+                        <a href="#">Digitale plaatsing</a>
+                    </div>
+                    <div class="ctg-modal-column">
+                        <h3>Support</h3>
+                        <a href="#">Training</a>
+                        <a href="#">Serviceafspraak</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ctg-modal-pane" data-category="assortiment">
+                <h2>Assortiment</h2>
+                <div class="ctg-modal-grid">
+                    <div class="ctg-modal-column">
+                        <h3>Breed aanbod</h3>
+                        <a href="#">Bekijk alle producten</a>
+                        <a href="#">Nieuwe items</a>
+                    </div>
+                    <div class="ctg-modal-column">
+                        <h3>Snelle links</h3>
+                        <a href="#">Bestellen</a>
+                        <a href="#">Download catalogus</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="ctg-modal-pane" data-category="service">
+                <h2>Service</h2>
+                <div class="ctg-modal-grid">
+                    <div class="ctg-modal-column">
+                        <h3>Ondersteuning</h3>
+                        <a href="#">Veelgestelde vragen</a>
+                        <a href="#">Contact met service</a>
+                    </div>
+                    <div class="ctg-modal-column">
+                        <h3>Na aankoop</h3>
+                        <a href="#">Garantie</a>
+                        <a href="#">Retourinformatie</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

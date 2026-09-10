@@ -1,0 +1,357 @@
+/* product Section */
+
+.ctg-nav {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	padding: 1.4rem 7%;
+	border-bottom: 1px solid var(--primary-color);
+}
+
+.ctg-nav .nav {
+	width: 100%;
+}
+
+.ctg-nav .ctg-navigation {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	gap: 1rem;
+}
+
+.ctg-nav .cta {
+	appearance: none;
+	border: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.8rem;
+	font-size: 1.5rem;
+	font-weight: 500;
+	color: aliceblue;
+	font-style: italic;
+	border-radius: 999px;
+	padding: 1rem 2rem;
+	box-shadow: 1px 1px 3px #b66310;
+	position: relative;
+	background-color: var(--primary-color);
+	cursor: pointer;
+
+}
+
+.ctg-nav .ctg-menu {
+	white-space: nowrap;
+}
+
+.ctg-nav .ctg-menu:hover {
+	color: var(--primary-color);
+	background-color: rgba(182, 137, 91, 0.08);
+}
+
+.ctg-nav .ctg-menu svg {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.ctg-nav .ctg-menu span {
+	display: inline-block;
+}
+
+.ctg-modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 9999;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 8.5rem 2rem 2rem;
+}
+
+.ctg-modal.active {
+	display: flex;
+}
+
+.ctg-modal-panel {
+	background-color: #fefefe;
+	color: var(--background-color);
+	width: min(100%, 120rem);
+	min-height: 42rem;
+	padding: 2rem;
+	border: 1px solid #d9d9d9;
+	position: relative;
+	animation: animateModal 0.35s ease;
+	border-radius: 1.25rem;
+	box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+	display: grid;
+	grid-template-columns: 20rem 1fr;
+	gap: 2rem;
+}
+
+.ctg-modal .close-icon {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	color: var(--background-color);
+	background: transparent;
+	border: none;
+	padding: 0.25rem;
+	cursor: pointer;
+	transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.ctg-modal .close-icon:hover,
+.ctg-modal .close-icon:focus-visible {
+	color: var(--primary-color);
+	transform: scale(1.08);
+	outline: none;
+}
+
+.ctg-modal-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	padding-right: 1rem;
+	border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ctg-modal-sidebar a {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.1rem 1rem;
+	border-radius: 0.9rem;
+	color: #2d3a34;
+	font-size: 1.35rem;
+}
+
+.ctg-modal-sidebar a.is-active,
+.ctg-modal-sidebar a:hover {
+	background-color: rgba(182, 137, 91, 0.12);
+	color: var(--primary-color);
+}
+
+.ctg-modal-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem 1rem 1rem 0;
+}
+
+.ctg-modal-pane {
+	display: none;
+	flex-direction: column;
+	gap: 1rem;
+	height: 100%;
+}
+
+.ctg-modal-pane.is-active {
+	display: flex;
+}
+
+.ctg-modal-content h2 {
+	font-size: 2.1rem;
+	color: #2d3a34;
+	margin-bottom: 0.25rem;
+}
+
+.ctg-modal-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.ctg-modal-column {
+	display: flex;
+	flex-direction: column;
+	gap: 0.50rem;
+}
+
+.ctg-modal-column h3 {
+	font-size: 1.25rem;
+	color: #2d3a34;
+	margin-bottom: 0.5rem;
+}
+
+.ctg-modal-column a {
+	font-size: 1rem;
+	color: #4c7f72;
+	padding: 0.25rem 0;
+}
+
+.ctg-modal-sidebar a {
+	text-decoration: none;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@keyframes animateModal {
+	from {
+		transform: translateY(-2rem);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+
+.hero .product {
+	/* max-width: 60rem; */
+	padding: 1.4rem 7%;
+	margin-left: 1rem;
+	position: relative;
+	z-index: 1;
+}
+
+.hero .product h1 {
+	font-size: 2.5em;
+	color: aliceblue;
+	text-shadow: 1px 1px 3px #b66310;
+	line-height: 1.2;
+}
+
+.product .implant-categorie h2 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 2rem;
+	font-size:2rem;
+	color: aliceblue;
+}
+
+.product .product-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+	gap: 2rem;
+	margin-top: 1.5rem;
+	clear: both;
+}
+
+.product .product-card {
+	position: relative;
+	text-align: center;
+	padding: 2rem;
+	max-width: none;
+	float: none;
+	width: 100%;
+	border-radius: 1rem;
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.08);
+	transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+	cursor: pointer;
+}
+
+.product .product-card:hover,
+.product .product-card:focus-within {
+	transform: translateY(-0.45rem);
+	box-shadow: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.16);
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+
+.product .product-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem 0;
+}
+
+.product .product-image img {
+	width: 100%;
+	max-width: 18rem;
+	height: auto;
+	aspect-ratio: 3 / 2;
+	object-fit: contain;
+	transition: transform 0.25s ease;
+}
+
+.product .product-card:hover .product-image img,
+.product .product-card:focus-within .product-image img {
+	transform: scale(1.04);
+}
+
+.product .product-content h3,
+.product .product-content h4,
+.product .product-content h5,
+.product .product-content h6 {
+	font-size: 1.25rem;
+	color: aliceblue;
+	
+}
+
+@media (max-width: 810px) {
+	.hero .product {
+		margin-left: 0;
+		padding: 1.4rem 5%;
+	}
+
+	.product .product-grid {
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: 1.25rem;
+	}
+
+	.product .product-card {
+		padding: 1.25rem;
+	}
+
+	.product .product-image img {
+		max-width: 100%;
+		aspect-ratio: 3 / 2;
+	}
+
+	.ctg-nav .ctg-menu {
+		padding: 1rem;
+	}
+
+	.ctg-nav .ctg-menu span {
+		display: none;
+	}
+
+	.ctg-modal {
+		padding: 8rem 1rem 1rem;
+	}
+
+	.ctg-modal-panel {
+		grid-template-columns: 1fr;
+		max-height: calc(100vh - 9rem);
+		overflow: auto;
+	}
+
+	.ctg-modal-sidebar {
+		padding-right: 0;
+		padding-bottom: 1rem;
+		border-right: none;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	}
+
+	.ctg-modal-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 480px) {
+	.product .product-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.hero .product h1 {
+		font-size: 2em;
+	}
+
+	.product .implant-categorie h2 {
+		font-size: 1.6rem;
+	}
+
+	.product .product-content h3,
+	.product .product-content h4,
+	.product .product-content h5,
+	.product .product-content h6 {
+		font-size: 1.25rem;
+	}
+}

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Jansdijk Implant Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="~/styles/general.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <nav class="navbar">
+        <a asp-page="/Index" class="navbar-logo">Jansdijk<span>Implant</span>.</a>
+
+        <div class="navbar-nav">
+            <a asp-page="/Index">Home</a>
+            <a asp-page="/About">Over Ons</a>
+            <a asp-page="/OnzeProducten">Onze Producten</a>
+            <a asp-page="/Contact">Contact</a>
+        </div>
+
+        <div class="navbar-extra">
+            <a href="#" id="search-button"><i data-feather="search"></i></a>
+            <a href="#" id="shopping-cart-button"><i data-feather="shopping-cart"></i></a>
+            <a href="#" id="menu"><i data-feather="menu"></i></a>
+        </div>
+
+        <div class="search-form">
+            <input type="search" placeholder="Type here..." id="search-box">
+            <label for="search-box"><i data-feather="search"></i></label>
+        </div>
+
+        <div class="shopping-cart">
+            <div class="cart-item">
+                <img src="~/images/implant.png" alt="product 1">
+                <div class="item-detail">
+                    <h4>Implant 1</h4>
+                    <div class="item-price">€ 100</div>
+                </div>
+                <i data-feather="trash-2" class="remove-item"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="credits">
+            <p>&copy; 2026 | Jansdijk Implant Solutions. Alle rechten voorbehouden.</p>
+        </div>
+        <div class="payment">
+            <a href="#"><img src="~/payment icons/ideal.svg" alt="iDEAL" /></a>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+    </script>
+    <script src="~/js/script.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

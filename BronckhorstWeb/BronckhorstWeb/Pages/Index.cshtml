@@ -1,0 +1,93 @@
+﻿@page "/"
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/styles/home.css" />
+}
+
+<section class="hero" id="home">
+    <main class="content">
+        <h1>Welkom bij <span>Jansdijk Implant Solutions</span></h1>
+        <p>Uw partner in hoogwaardige tandheelkundige implantaten en oplossingen.
+            We zijn distributeur van Sweden & Martina implantaat- en prothetische systemen in Nederland</p>
+        <a asp-page="/OnzeProducten" class="cta">Bekijk Onze Producten</a>
+    </main>
+</section>
+
+<section id="products" class="products" x-data="products">
+    <h2><span>Onze</span> Productcategorieën</h2>
+    <p>Ontdek onze uitgebreide selectie van tandheelkundige implantaten en gerelateerde producten,
+        ontworpen om aan al uw behoeften te voldoen.</p>
+
+    <div class="row">
+        <div class="product-card">
+            <div class="product-icons">
+                <a href="#"><i data-feather="shopping-cart"></i></a>
+                <a href="#" class="item-detail-button1"><i data-feather="eye"></i></a>
+            </div>
+
+            <div class="product-image">
+                <a href="#">
+                    <img src="~/images/prama nasal.png" alt="Implantaten" />
+                </a>
+            </div>
+
+            <div class="product-content">
+                <h3>- Implantaten -</h3>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-icons">
+                <a href="#"><i data-feather="shopping-cart"></i></a>
+                <a href="#" class="item-detail-button2"><i data-feather="eye"></i></a>
+            </div>
+
+            <div class="product-image">
+                <a href="#">
+                    <img src="~/images/noxitrsprnt.png" alt="Noxi" />
+                </a>
+            </div>
+
+            <div class="product-content">
+                <h3>- Noxi -</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal" id="item-detail-modal1">
+    <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+            <img src="~/images/implant.png" alt="Implantaten" />
+            <div class="product-content">
+                <h3>- Implantaten -</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
+                <div class="product-price">€ 100,00 <span>€ 150,00</span></div>
+                <a href="#"><i data-feather="shopping-cart"></i><span>Add to Cart</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="item-detail-modal2">
+    <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+            <img src="~/images/noxitrsprnt.png" alt="Noxi" />
+            <div class="product-content">
+                <h3>- Noxi -</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
+                <div class="product-price">€ 100,00 <span>€ 150,00</span></div>
+                <a href="#"><i data-feather="shopping-cart"></i><span>Add to Cart</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/app.js"></script>
+}

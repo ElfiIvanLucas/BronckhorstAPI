@@ -1,0 +1,72 @@
+.contact h1 span{
+    color: var(--primary-color);
+    
+}
+.hero .contact h1 {
+	font-size: 2em;
+	color: aliceblue;
+	text-shadow: 1px 1px 3px #b66310;
+	line-height: 1.2;
+	text-align: center;
+    margin-top: 4rem;
+}
+.contact p {
+    font-size: 1.6rem;
+    margin: auto;
+    line-height: 1.4;
+    font-weight: 100;
+    text-align: center;
+    max-width: 30rem;
+}
+
+.contact .row {
+    margin-top: 2rem;
+    display: flex;
+   background-color:var(background-color);
+    padding: 2rem;
+    gap: 2rem;
+   height: 100%;
+}
+
+.contact .row .map {
+    flex: 1 1 45rem;
+    width: 100%; 
+    object-fit: cover;
+}
+
+.contact .row form {
+    flex: 1 1 45rem;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.contact .row form .input-group {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: #222;
+    border: 1px solid rgb(243, 246, 248);
+    padding-left: 2rem;
+}
+
+.contact .row form .input-group input {
+   width: 100%;
+    padding: 2rem;
+    font-size: 1.7rem;
+    background-color: #222;
+    color: aliceblue;
+}
+
+.contact .row form .input-group input::placeholder {
+    color: aliceblue;
+}
+
+.contact .row form .btn {
+    margin-top: 3rem;
+    padding: 1rem 3rem;
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: aliceblue;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
