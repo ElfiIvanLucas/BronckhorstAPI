@@ -29,6 +29,10 @@ obj/
 
 # Logs
 *.log
+TestResults/
+
+# Third-party source maps
+**/wwwroot/lib/**/*.map
 
 # Publish output
 publish/
