@@ -1,0 +1,65 @@
+/* Hero Section */
+.hero::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	background-image: url(/images/imgoverons.jpg);
+	background-repeat: no-repeat;
+	background-size: 60% 100%;
+	background-position: right center;
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent 40%,
+		rgba(0, 0, 0, 0.85) 54%,
+		black 60%
+	);
+	mask-image: linear-gradient(
+		to right,
+		transparent 40%,
+		rgba(0, 0, 0, 0.85) 54%,
+		black 60%
+	);
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: 100% 100%;
+	mask-size: 100% 100%;
+	z-index: 0;
+	pointer-events: none;
+}
+
+.hero .content {
+	padding: 1.4rem 7% 1.4rem;
+	position: relative;
+	z-index: 1;
+}
+
+.hero .content h1 {
+	font-size: 4em;
+	color: aliceblue;
+	text-shadow: 1px 1px 3px #b66310;
+	line-height: 1.2;
+	text-align: center;
+}
+
+.hero .content h1 span {
+	color: var(--primary-color);
+}
+
+.hero .content p {
+	font-size: 1.6rem;
+	margin-top: 1rem;
+	line-height: 1.4;
+	font-weight: 100;
+	text-shadow: 1px 1px 3px #b66310;
+}
+
+.hero .content p {
+	position: relative;
+	left: 0;
+	max-width: 45vw;
+	margin-top: 200px;
+	font-size: 30px;
+}
