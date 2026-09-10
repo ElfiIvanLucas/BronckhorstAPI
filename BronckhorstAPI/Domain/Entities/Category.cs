@@ -1,12 +1,15 @@
-﻿namespace Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Domain.Entities;
+
+[ExcludeFromCodeCoverage]
 public class Category
 {
     public int Id { get; set; }
 
     public string? Name { get; set; }
 
-    public string? TranslatedName { get; set; } = null;
+    public string? TranslatedName { get; set; }
 
     public int? ParentId { get; set; }
 

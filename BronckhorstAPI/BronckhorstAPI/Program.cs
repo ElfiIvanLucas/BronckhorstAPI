@@ -1,15 +1,10 @@
-using Persistence;
-using Microsoft.EntityFrameworkCore;
+using BronckhorstAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<BronckhorstDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BronckhorstConnection"));
-});
+builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -26,4 +21,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();

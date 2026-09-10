@@ -1,6 +1,8 @@
 # Build output
 bin/
+*/bin/
 obj/
+*/obj/
 [Bb]in/
 [Oo]bj/
 
@@ -12,20 +14,21 @@ obj/
 *.binlog
 *.deps.json
 *.runtimeconfig.json
+*.map
 
 # User and IDE files
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
-.vs/
+**/.vs/
 
 # Rider / ReSharper
-.idea/
+**/.idea/
 *.sln.iml
 
 # Visual Studio Code
-.vscode/
+**/.vscode/
 
 # Logs
 *.log
@@ -35,8 +38,8 @@ TestResults/
 **/wwwroot/lib/**/*.map
 
 # Publish output
-publish/
-wwwroot/dist/
+**/publish/
+**/wwwroot/dist/
 
 # Local settings and secrets
 appsettings.*.json

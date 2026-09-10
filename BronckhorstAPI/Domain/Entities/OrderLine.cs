@@ -1,5 +1,8 @@
-﻿namespace Domain.Entities;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Domain.Entities;
+
+[ExcludeFromCodeCoverage]
 public class OrderLine
 {
     public int Id { get; set; }
@@ -12,7 +15,7 @@ public class OrderLine
 
     public decimal ProductPriceSnapshot { get; set; }
 
-    public string ProductNameSnapshot { get; set; } = null!;
+    public string ProductNameSnapshot { get; set; } = string.Empty;
 
     public CustomerOrder Order { get; set; } = null!;
 
