@@ -156,7 +156,7 @@
 	height: 25rem;
 }
 
-.products .product-content h3 {
+.products .product-content h3,h4 {
 	font-size: 1.5rem;
 	color: aliceblue;
 	
