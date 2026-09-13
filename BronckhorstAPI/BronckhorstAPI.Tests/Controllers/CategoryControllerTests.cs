@@ -1,6 +1,6 @@
 using BronckhorstAPI.Controller;
-using BronckhorstAPI.DTO;
-using BronckhorstAPI.Services.Interfaces;
+using BronckhorstAPI.Application.DTO;
+using BronckhorstAPI.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute.ExceptionExtensions;
 

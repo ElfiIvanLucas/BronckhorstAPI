@@ -1,10 +1,11 @@
-using BronckhorstAPI.DTO;
-using BronckhorstAPI.Services.Interfaces;
+using BronckhorstAPI.Application.DTO;
+using BronckhorstAPI.Application.Services.Interfaces;
+using BronckhorstAPI.Constants;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BronckhorstAPI.Controller;
 
-[Route("api/v1/[controller]")]
+[Route("api/" + ApIVersions.V1 + "/[controller]")]
 [ApiController]
 public class CategoryController : ControllerBase
 {
@@ -26,7 +27,7 @@ public class CategoryController : ControllerBase
         {
             var result = await _categoryService.GetAllCategoriesAsync();
 
-            if (result.Count != 0)
+            if (result.Count > 0)
             {
                 return Ok(result);
             }

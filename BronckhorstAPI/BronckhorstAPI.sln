@@ -5,15 +5,17 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI", "BronckhorstAPI\BronckhorstAPI.csproj", "{C0723E85-F835-46A8-9BB4-BE9BE3A11517}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI.Domain", "BronckhorstAPI.Domain\BronckhorstAPI.Domain.csproj", "{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{474C7A69-E87A-428F-A527-54362EED8FF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI.Application", "BronckhorstAPI.Application\BronckhorstAPI.Application.csproj", "{DDAE8B4D-168B-4D78-A1A1-4C43D4608CB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI.Infrastructure", "BronckhorstAPI.Infrastructure\BronckhorstAPI.Infrastructure.csproj", "{474C7A69-E87A-428F-A527-54362EED8FF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF1B5BDC-0F58-4DF6-90D0-5704F6A9FE1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI.Tests", "BronckhorstAPI.Tests\BronckhorstAPI.Tests.csproj", "{2B41299F-59F0-4098-8C5C-7026AFC38828}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence.Tests", "Persistence.Tests\Persistence.Tests.csproj", "{BE8EBA15-F6F0-4BA8-84C9-AFF024976742}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstAPI.Infrastructure.Tests", "BronckhorstAPI.Infrastructure.Tests\BronckhorstAPI.Infrastructure.Tests.csproj", "{BE8EBA15-F6F0-4BA8-84C9-AFF024976742}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFF36BFA-E0AD-4867-ADA9-BC3E06582D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDAE8B4D-168B-4D78-A1A1-4C43D4608CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDAE8B4D-168B-4D78-A1A1-4C43D4608CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDAE8B4D-168B-4D78-A1A1-4C43D4608CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDAE8B4D-168B-4D78-A1A1-4C43D4608CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{474C7A69-E87A-428F-A527-54362EED8FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{474C7A69-E87A-428F-A527-54362EED8FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{474C7A69-E87A-428F-A527-54362EED8FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU

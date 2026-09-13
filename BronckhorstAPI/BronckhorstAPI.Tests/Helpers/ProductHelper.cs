@@ -1,5 +1,5 @@
-using BronckhorstAPI.DTO;
-using Domain.Entities;
+using BronckhorstAPI.Application.DTO;
+using BronckhorstAPI.Domain.Entities;
 
 namespace BronckhorstAPI.Tests.Helpers;
 

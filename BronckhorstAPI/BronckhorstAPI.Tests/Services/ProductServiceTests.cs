@@ -1,10 +1,12 @@
-using BronckhorstAPI.DTO;
-using BronckhorstAPI.Mappers.Interfaces;
-using BronckhorstAPI.Services;
-using BronckhorstAPI.Services.Interfaces;
+using BronckhorstAPI.Application.DTO;
+using BronckhorstAPI.Application.Filters;
+using BronckhorstAPI.Application.Mappers.Interfaces;
+using BronckhorstAPI.Application.Pagination;
+using BronckhorstAPI.Application.Repositories.Interfaces;
+using BronckhorstAPI.Application.Services;
+using BronckhorstAPI.Application.Services.Interfaces;
+using BronckhorstAPI.Domain.Entities;
 using BronckhorstAPI.Tests.Helpers;
-using Domain.Entities;
-using Persistence.Repositories.Interfaces;
 
 namespace BronckhorstAPI.Tests.Services;
 
@@ -65,20 +67,33 @@ public class ProductServiceTests
     }
 
     [Fact]
-    public async Task TestGetProductsByCategoryAsync_HasValues_ReturnsProductsForCategory()
+    public async Task TestGetProductsByFiltersAsync_HasValues_ReturnsFilteredProducts()
     {
         // Arrange
-        const int categoryId = 1;
-        var expectedResult = new List<ProductDto> { ProductHelper.CreateProductDto() };
-        _substituteProductRepository.GetByCategoryIdAsync(categoryId).Returns(ProductHelper.CreateProductEntities());
+        var productFilters = new ProductFilters { CategoryId = 1 };
+        var expectedResult = new PageResult<ProductDto>
+        {
+            Page = 1,
+            PageSize = 10,
+            TotalCount = 1,
+            Items = [ProductHelper.CreateProductDto()]
+        };
+        _substituteProductRepository.GetProductsByFiltersAsync(productFilters)
+            .Returns(new PageResult<Product>
+            {
+                Page = 1,
+                PageSize = 10,
+                TotalCount = 1,
+                Items = ProductHelper.CreateProductEntities()
+            });
         _substituteProductMapper.MapToDto(Arg.Any<Product>()).Returns(ProductHelper.CreateProductDto());
 
         // Act
-        var result = await _productService.GetProductsByCategoryAsync(categoryId);
+        var result = await _productService.GetProductsByFiltersAsync(productFilters);
 
         // Assert
         Assert.Equivalent(expectedResult, result);
         _substituteProductMapper.Received(1).MapToDto(Arg.Any<Product>());
-        await _substituteProductRepository.Received(1).GetByCategoryIdAsync(categoryId);
+        await _substituteProductRepository.Received(1).GetProductsByFiltersAsync(productFilters);
     }
 }

@@ -1,6 +1,8 @@
 using BronckhorstAPI.Controller;
-using BronckhorstAPI.DTO;
-using BronckhorstAPI.Services.Interfaces;
+using BronckhorstAPI.Application.DTO;
+using BronckhorstAPI.Application.Filters;
+using BronckhorstAPI.Application.Pagination;
+using BronckhorstAPI.Application.Services.Interfaces;
 using BronckhorstAPI.Tests.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute.ExceptionExtensions;
@@ -76,67 +78,78 @@ public class ProductControllerTests
     }
 
     [Fact]
-    public async Task TestGetProductsByCategory_HasNoProducts_ReturnsNotFoundResult()
+    public async Task TestGetProductsByFiltersAsync_HasNoProducts_ReturnsEmptyPageResult()
     {
         // Arrange
-        const int categoryId = 1;
-        _productService.GetProductsByCategoryAsync(categoryId).Returns([]);
+        var productFilters = new ProductFilters { CategoryId = 1 };
+        var expectedResult = new PageResult<ProductDto> { Items = [] };
+        _productService.GetProductsByFiltersAsync(productFilters).Returns(expectedResult);
 
         // Act
-        var result = await _productController.GetProductsByCategory(categoryId);
-
-        // Assert
-        Assert.IsType<NotFoundResult>(result);
-        await _productService.Received(1).GetProductsByCategoryAsync(categoryId);
-    }
-
-    [Fact]
-    public async Task TestGetProductsByCategory_HasProducts_ReturnsOkResult()
-    {
-        // Arrange
-        const int categoryId = 1;
-        var expectedProducts = new List<ProductDto> { ProductHelper.CreateProductDto() };
-        _productService.GetProductsByCategoryAsync(categoryId).Returns(expectedProducts);
-
-        // Act
-        var result = await _productController.GetProductsByCategory(categoryId);
+        var result = await _productController.GetProductsByFiltersAsync(productFilters);
 
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
-        var actualProducts = Assert.IsType<List<ProductDto>>(okResult.Value);
-        Assert.Equivalent(expectedProducts, actualProducts);
-        await _productService.Received(1).GetProductsByCategoryAsync(categoryId);
+        Assert.Equivalent(expectedResult, Assert.IsType<PageResult<ProductDto>>(okResult.Value));
+        await _productService.Received(1).GetProductsByFiltersAsync(productFilters);
     }
 
     [Fact]
-    public async Task TestGetProductsByCategory_InternalServerError_ReturnsStatusCode500()
+    public async Task TestGetProductsByFiltersAsync_HasProducts_ReturnsOkResult()
     {
         // Arrange
-        const int categoryId = 1;
-        _productService.GetProductsByCategoryAsync(categoryId).ThrowsAsync(new Exception());
+        var productFilters = new ProductFilters { CategoryId = 1 };
+        var expectedResult = new PageResult<ProductDto>
+        {
+            Page = 1,
+            PageSize = 10,
+            TotalCount = 1,
+            Items = [ProductHelper.CreateProductDto()]
+        };
+        _productService.GetProductsByFiltersAsync(productFilters).Returns(expectedResult);
 
         // Act
-        var result = await _productController.GetProductsByCategory(categoryId);
+        var result = await _productController.GetProductsByFiltersAsync(productFilters);
+
+        // Assert
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        var actualProducts = Assert.IsType<PageResult<ProductDto>>(okResult.Value);
+        Assert.Equivalent(expectedResult, actualProducts);
+        await _productService.Received(1).GetProductsByFiltersAsync(productFilters);
+    }
+
+    [Fact]
+    public async Task TestGetProductsByFiltersAsync_InternalServerError_ReturnsStatusCode500()
+    {
+        // Arrange
+        var productFilters = new ProductFilters { CategoryId = 1 };
+        _productService.GetProductsByFiltersAsync(productFilters).ThrowsAsync(new Exception());
+
+        // Act
+        var result = await _productController.GetProductsByFiltersAsync(productFilters);
 
         // Assert
         var objectResult = Assert.IsType<ObjectResult>(result);
         Assert.Equal(500, objectResult.StatusCode);
-        await _productService.Received(1).GetProductsByCategoryAsync(categoryId);
+        await _productService.Received(1).GetProductsByFiltersAsync(productFilters);
     }
 
-    [Theory]
-    [InlineData(0)]
-    [InlineData(-1)]
-    public async Task TestGetProductsByCategory_InvalidCategoryId_ReturnsBadRequest(int categoryId)
+    [Fact]
+    public async Task TestGetProductsByFiltersAsync_ServiceThrowsArgumentException_ReturnsBadRequest()
     {
         // Arrange
+        var productFilters = new ProductFilters { CategoryId = 1 };
+        const string expectedMessage = "Invalid filters";
+        _productService.GetProductsByFiltersAsync(productFilters)
+            .ThrowsAsync(new ArgumentException(expectedMessage));
 
         // Act
-        var result = await _productController.GetProductsByCategory(categoryId);
+        var result = await _productController.GetProductsByFiltersAsync(productFilters);
 
         // Assert
-        Assert.IsType<BadRequestObjectResult>(result);
-        await _productService.DidNotReceive().GetProductsByCategoryAsync(Arg.Any<int>());
+        var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        Assert.Equal(expectedMessage, badRequestResult.Value);
+        await _productService.Received(1).GetProductsByFiltersAsync(productFilters);
     }
 
     [Fact]
