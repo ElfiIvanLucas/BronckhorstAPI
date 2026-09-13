@@ -10,7 +10,7 @@ public class ProductFilters
     public decimal? MaxPrice { get; init; }
     public string? Name { get; init; }
 
-    public int Page { get; init; }
-    public int PageSize { get; init; }
-    public ProductSort Sort { get; init; }
+    public int Page { get; init; } = 1;
+    public int PageSize { get; init; } = 12;
+    public ProductSort Sort { get; init; } = ProductSort.NameAsc;
 }
