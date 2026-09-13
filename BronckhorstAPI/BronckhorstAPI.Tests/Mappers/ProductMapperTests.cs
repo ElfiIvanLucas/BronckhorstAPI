@@ -1,8 +1,8 @@
-using BronckhorstAPI.DTO;
-using BronckhorstAPI.Mappers;
-using BronckhorstAPI.Mappers.Interfaces;
+using BronckhorstAPI.Application.DTO;
+using BronckhorstAPI.Application.Mappers;
+using BronckhorstAPI.Application.Mappers.Interfaces;
 using BronckhorstAPI.Tests.Helpers;
-using Domain.Entities;
+using BronckhorstAPI.Domain.Entities;
 
 namespace BronckhorstAPI.Tests.Mappers;
 

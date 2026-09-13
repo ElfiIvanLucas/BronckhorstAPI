@@ -1,24 +1,35 @@
-using BronckhorstAPI.Extensions;
+using System.Diagnostics.CodeAnalysis;
+using BronckhorstAPI.Application.Extensions;
+using BronckhorstAPI.Infrastructure.Extensions;
+using Scalar.AspNetCore;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
-builder.Services.ConfigureServices(builder.Configuration);
+namespace BronckhorstAPI;
 
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+[ExcludeFromCodeCoverage]
+public static class Program
 {
-    app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static async Task Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddControllers();
+        builder.Services.AddOpenApi();
+        builder.Services.AddApplication();
+        builder.Services.AddInfrastructure(builder.Configuration);
+
+        var app = builder.Build();
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.MapOpenApi();
+            app.MapScalarApiReference();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        await app.RunAsync();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-await app.RunAsync();
