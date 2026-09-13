@@ -80,10 +80,10 @@ public class ProductRepository : IProductRepository
     private static IQueryable<Product> SortProducts(IQueryable<Product> products, ProductSort sort) =>
         sort switch
         {
-            ProductSort.PriceAsc => products.OrderBy(p => p.Price),
-            ProductSort.PriceDesc => products.OrderByDescending(p => p.Price),
-            ProductSort.NameAsc => products.OrderBy(p => p.Name),
-            ProductSort.NameDesc => products.OrderByDescending(p => p.Name),
+            ProductSort.PriceAsc => products.OrderBy(p => p.Price).ThenBy(p => p.Id),
+            ProductSort.PriceDesc => products.OrderByDescending(p => p.Price).ThenBy(p => p.Id),
+            ProductSort.NameAsc => products.OrderBy(p => p.Name).ThenBy(p => p.Id),
+            ProductSort.NameDesc => products.OrderByDescending(p => p.Name).ThenBy(p => p.Id),
             _ => products
         };
 }
