@@ -36,7 +36,7 @@ public class BrandController : ApiControllerBase
         }
         catch (Exception exception)
         {
-            return StatusCode(500, exception.Message);
+            return Problem(statusCode: StatusCodes.Status500InternalServerError);
         }
     }
 }
