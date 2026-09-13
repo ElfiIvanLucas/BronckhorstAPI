@@ -70,7 +70,8 @@ public class ProductRepository : IProductRepository
 
         if (!string.IsNullOrEmpty(productFilters.Name))
         {
-            products = products.Where(p => p.Name.Contains(productFilters.Name));
+            products = products.Where(p =>
+                p.Name.Contains(productFilters.Name) || p.ArtikelCode.Contains(productFilters.Name));
         }
 
         return SortProducts(products, productFilters.Sort);
