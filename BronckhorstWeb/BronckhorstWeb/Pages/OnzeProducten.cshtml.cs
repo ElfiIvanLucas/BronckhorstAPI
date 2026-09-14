@@ -20,6 +20,9 @@ public class OnzeProductenModel : PageModel
     public int? BrandId { get; set; }
 
     [BindProperty(SupportsGet = true)]
+    public int? ParentCategoryId { get; set; }
+
+    [BindProperty(SupportsGet = true)]
     public int? CategoryId { get; set; }
 
     [BindProperty(SupportsGet = true)]
@@ -31,7 +34,7 @@ public class OnzeProductenModel : PageModel
     [BindProperty(SupportsGet = true)]
     public string? Name { get; set; }
 
-    [BindProperty(Name = "page", SupportsGet = true)]
+        [BindProperty(SupportsGet = true)]
     public int CurrentPage { get; set; } = 1;
 
     [BindProperty(SupportsGet = true)]
@@ -43,6 +46,14 @@ public class OnzeProductenModel : PageModel
     public IReadOnlyList<BrandDto> Brands { get; private set; } = [];
 
     public IReadOnlyList<CategoryDto> Categories { get; private set; } = [];
+
+    public IReadOnlyList<CategoryDto> ParentCategories =>
+        Categories.Where(category => category.ParentId is null).ToList();
+
+    public IReadOnlyList<CategoryDto> SubCategories =>
+        ParentCategoryId is int parentCategoryId
+            ? Categories.Where(category => category.ParentId == parentCategoryId).ToList()
+            : [];
 
     public PageResult<ProductDto> Products { get; private set; } = new();
 
@@ -63,7 +74,12 @@ public class OnzeProductenModel : PageModel
         {
             var brandsTask = _productApiClient.GetBrandsAsync();
             var categoriesTask = _productApiClient.GetCategoriesAsync();
-            var productsTask = _productApiClient.GetProductsAsync(new ProductFilters
+
+            await Task.WhenAll(brandsTask, categoriesTask);
+            Brands = await brandsTask;
+            Categories = await categoriesTask;
+            NormalizeCategoryFilter();
+            Products = await _productApiClient.GetProductsAsync(new ProductFilters
             {
                 BrandId = BrandId,
                 CategoryId = CategoryId,
@@ -74,16 +90,28 @@ public class OnzeProductenModel : PageModel
                 PageSize = PageSize,
                 Sort = Sort
             });
-
-            await Task.WhenAll(brandsTask, categoriesTask, productsTask);
-            Brands = await brandsTask;
-            Categories = await categoriesTask;
-            Products = await productsTask;
         }
         catch (HttpRequestException exception)
         {
             _logger.LogError(exception, "Could not load the product catalog.");
             LoadError = "De productcatalogus kan momenteel niet worden geladen.";
+        }
+    }
+
+    private void NormalizeCategoryFilter()
+    {
+        if (ParentCategoryId is not int parentCategoryId ||
+            !Categories.Any(category => category.Id == parentCategoryId && category.ParentId is null))
+        {
+            ParentCategoryId = null;
+            CategoryId = null;
+            return;
+        }
+
+        if (CategoryId is not int categoryId ||
+            !Categories.Any(category => category.Id == categoryId && category.ParentId == parentCategoryId))
+        {
+            CategoryId = null;
         }
     }
 }

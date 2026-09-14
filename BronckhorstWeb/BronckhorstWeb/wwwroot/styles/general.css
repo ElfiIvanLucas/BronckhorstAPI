@@ -6,6 +6,8 @@ html {
 :root {
     --primary-color: #b6895b;
     --background-color: #1a1818;
+    --navigation-height: 6rem;
+    --footer-height: 5.8rem;
 }
 
 * {
@@ -22,7 +24,7 @@ body {
     background: var(--background-color);
     font-family: 'poppins', sans-serif;
     color: aliceblue;
-    padding-top: 6.0rem;
+    padding-top: var(--navigation-height);
 }
 
 /* Navbar Styles */
@@ -196,6 +198,7 @@ body {
 /* footer */
 footer {
 	background-color: var(--primary-color);
+    min-height: var(--footer-height);
 	padding: 1.4rem;
 	text-align: left;
 	display: flex;

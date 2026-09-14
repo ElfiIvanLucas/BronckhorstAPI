@@ -34,14 +34,26 @@
                 }
             </select>
 
-            <label asp-for="CategoryId">Categorie</label>
-            <select asp-for="CategoryId">
-                <option value="">Alle categorieën</option>
-                @foreach (var category in Model.Categories)
+            <label asp-for="ParentCategoryId">Hoofdcategorie</label>
+            <select asp-for="ParentCategoryId" onchange="this.form.submit()">
+                <option value="">Kies een hoofdcategorie</option>
+                @foreach (var category in Model.ParentCategories)
                 {
                     <option value="@category.Id">@(category.TranslatedName ?? category.Name)</option>
                 }
             </select>
+
+            @if (Model.ParentCategoryId.HasValue)
+            {
+                <label asp-for="CategoryId">Subcategorie</label>
+                <select asp-for="CategoryId">
+                    <option value="">Alle subcategorieën</option>
+                    @foreach (var category in Model.SubCategories)
+                    {
+                        <option value="@category.Id">@(category.TranslatedName ?? category.Name)</option>
+                    }
+                </select>
+            }
 
             <fieldset class="price-filter">
                 <legend>Prijs</legend>
@@ -55,7 +67,7 @@
                 </div>
             </fieldset>
 
-            <input type="hidden" name="page" value="1" />
+            <input type="hidden" name="CurrentPage" value="1" />
             <button type="submit" class="filter-submit">Toepassen</button>
         </aside>
 
@@ -123,7 +135,7 @@
                 <nav class="pagination" aria-label="Paginanavigatie">
                     @if (Model.HasPreviousPage)
                     {
-                        <a asp-route-page="@(Model.Products.Page - 1)" asp-route-BrandId="@Model.BrandId" asp-route-CategoryId="@Model.CategoryId" asp-route-MinPrice="@Model.MinPrice" asp-route-MaxPrice="@Model.MaxPrice" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Vorige</a>
+                        <a asp-page="/OnzeProducten" asp-route-CurrentPage="@(Model.Products.Page - 1)" asp-route-BrandId="@Model.BrandId" asp-route-ParentCategoryId="@Model.ParentCategoryId" asp-route-CategoryId="@Model.CategoryId" asp-route-MinPrice="@Model.MinPrice" asp-route-MaxPrice="@Model.MaxPrice" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Vorige</a>
                     }
                     else
                     {
@@ -132,7 +144,7 @@
                     <span>Pagina @Model.Products.Page van @Model.TotalPages</span>
                     @if (Model.HasNextPage)
                     {
-                        <a asp-route-page="@(Model.Products.Page + 1)" asp-route-BrandId="@Model.BrandId" asp-route-CategoryId="@Model.CategoryId" asp-route-MinPrice="@Model.MinPrice" asp-route-MaxPrice="@Model.MaxPrice" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Volgende</a>
+                        <a asp-page="/OnzeProducten" asp-route-CurrentPage="@(Model.Products.Page + 1)" asp-route-BrandId="@Model.BrandId" asp-route-ParentCategoryId="@Model.ParentCategoryId" asp-route-CategoryId="@Model.CategoryId" asp-route-MinPrice="@Model.MinPrice" asp-route-MaxPrice="@Model.MaxPrice" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Volgende</a>
                     }
                     else
                     {

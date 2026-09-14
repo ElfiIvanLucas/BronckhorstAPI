@@ -11,12 +11,12 @@ public class ProductApiClient
 
     public async Task<IReadOnlyList<BrandDto>> GetBrandsAsync()
     {
-        return await GetAsync<IReadOnlyList<BrandDto>>("api/v1/Brand/GetProducts");
+        return await GetCollectionAsync<BrandDto>("api/v1/Brand/GetProducts");
     }
 
     public async Task<IReadOnlyList<CategoryDto>> GetCategoriesAsync()
     {
-        return await GetAsync<IReadOnlyList<CategoryDto>>("api/v1/Category/GetCategories");
+        return await GetCollectionAsync<CategoryDto>("api/v1/Category/GetCategories");
     }
 
     public async Task<PageResult<ProductDto>> GetProductsAsync(ProductFilters productFilters)
@@ -30,12 +30,18 @@ public class ProductApiClient
                ?? throw new InvalidOperationException("The product API returned an empty response.");
     }
 
-    private async Task<T> GetAsync<T>(string requestUri)
+    private async Task<IReadOnlyList<T>> GetCollectionAsync<T>(string requestUri)
     {
         using var response = await _httpClient.GetAsync(requestUri);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return [];
+        }
+
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<T>()
+        return await response.Content.ReadFromJsonAsync<IReadOnlyList<T>>()
                ?? throw new InvalidOperationException("The API returned an empty response.");
     }
 }

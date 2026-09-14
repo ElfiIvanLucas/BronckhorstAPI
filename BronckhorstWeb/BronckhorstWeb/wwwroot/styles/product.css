@@ -340,6 +340,7 @@
 }
 
 .catalog {
+	min-height: calc(100dvh - var(--navigation-height) - var(--footer-height));
 	padding: 4rem 7%;
 	color: aliceblue;
 }
