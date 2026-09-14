@@ -6,7 +6,7 @@ obj/
 [Bb]in/
 [Oo]bj/
 
-*/ProductImages/*
+/BronckhorstWeb/BronckhorstWeb/wwwroot/images/ProductImages/
 
 # .NET artifacts
 *.dll
