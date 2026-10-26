@@ -26,15 +26,9 @@ public class OnzeProductenModel : PageModel
     public int? CategoryId { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    public decimal? MinPrice { get; set; }
-
-    [BindProperty(SupportsGet = true)]
-    public decimal? MaxPrice { get; set; }
-
-    [BindProperty(SupportsGet = true)]
     public string? Name { get; set; }
 
-        [BindProperty(SupportsGet = true)]
+    [BindProperty(SupportsGet = true)]
     public int CurrentPage { get; set; } = 1;
 
     [BindProperty(SupportsGet = true)]
@@ -47,15 +41,15 @@ public class OnzeProductenModel : PageModel
 
     public IReadOnlyList<CategoryDto> Categories { get; private set; } = [];
 
-    public IReadOnlyList<CategoryDto> ParentCategories =>
+    public IReadOnlyList<CategoryDto> GetParentCategories() =>
         Categories.Where(category => category.ParentId is null).ToList();
 
-    public IReadOnlyList<CategoryDto> SubCategories =>
+    public IReadOnlyList<CategoryDto> GetSubCategories() =>
         ParentCategoryId is int parentCategoryId
             ? Categories.Where(category => category.ParentId == parentCategoryId).ToList()
             : [];
 
-    public PageResult<ProductDto> Products { get; private set; } = new();
+    public PageResult<ProductGroupDto> Products { get; private set; } = new();
 
     public string? LoadError { get; private set; }
 
@@ -79,17 +73,17 @@ public class OnzeProductenModel : PageModel
             Brands = await brandsTask;
             Categories = await categoriesTask;
             NormalizeCategoryFilter();
-            Products = await _productApiClient.GetProductsAsync(new ProductFilters
+            Products = await _productApiClient.GetProductGroupsAsync(new ProductFilters
             {
                 BrandId = BrandId,
+                ParentCategoryId = ParentCategoryId,
                 CategoryId = CategoryId,
-                MinPrice = MinPrice,
-                MaxPrice = MaxPrice,
                 Name = Name,
                 Page = CurrentPage,
                 PageSize = PageSize,
                 Sort = Sort
             });
+            CurrentPage = Products.Page;
         }
         catch (HttpRequestException exception)
         {

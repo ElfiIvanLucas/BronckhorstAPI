@@ -45,4 +45,13 @@ public class ProductService : IProductService
             Items = result.Items.Select(_productMapper.MapToDto).ToList()
         };
     }
+
+    public Task<PageResult<ProductGroupDto>> GetProductGroupsAsync(ProductFilters productFilters)
+        => _productRepository.GetProductGroupsAsync(productFilters);
+
+    public async Task<List<ProductDto>> GetProductsByCodeAsync(string productCode)
+    {
+        var products = await _productRepository.GetProductsByCodeAsync(productCode);
+        return products.Select(_productMapper.MapToDto).ToList();
+    }
 }

@@ -10,5 +10,9 @@ public interface IProductService
 
     Task<PageResult<ProductDto>> GetProductsByFiltersAsync(ProductFilters productFilters);
 
+    Task<PageResult<ProductGroupDto>> GetProductGroupsAsync(ProductFilters productFilters);
+
+    Task<List<ProductDto>> GetProductsByCodeAsync(string productCode);
+
     Task<ProductDto> GetProductByIdAsync(int id);
 }

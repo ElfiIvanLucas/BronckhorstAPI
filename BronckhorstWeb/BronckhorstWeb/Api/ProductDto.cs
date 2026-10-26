@@ -12,5 +12,9 @@ public class ProductDto
 
     public decimal Price { get; set; }
 
+    public string ProductCode { get; set; } = string.Empty;
+
+    public string Dimensions { get; set; } = string.Empty;
+
     public string? Image { get; set; }
 }

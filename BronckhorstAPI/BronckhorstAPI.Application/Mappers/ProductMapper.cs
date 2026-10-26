@@ -14,6 +14,8 @@ public class ProductMapper : IMapper<Product, ProductDto>
             Name = entity.Name,
             Description = entity.Description,
             Price = entity.Price,
+            ProductCode = entity.ProductCode,
+            Dimensions = entity.Dimensions,
             Image = entity.Image
         };
 }

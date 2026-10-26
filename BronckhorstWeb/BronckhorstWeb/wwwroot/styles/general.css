@@ -1,5 +1,4 @@
 html {
-    scroll-behavior: smooth;
     scroll-padding-top: 6rem;
 }
 
@@ -25,6 +24,18 @@ body {
     font-family: 'poppins', sans-serif;
     color: aliceblue;
     padding-top: var(--navigation-height);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* Navbar Styles */
@@ -71,7 +82,6 @@ body {
     padding-bottom: 0.5rem;
     border-bottom: 0.1rem solid var(--primary-color);
     transform: scaleX(0);
-    transition: transform 0.3s linear;
 
 }
 
@@ -106,7 +116,6 @@ body {
     height: 3rem;
     transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.3s;
 }   
 
 .navbar .search-form.active {
@@ -139,7 +148,6 @@ body {
     padding: 0 1.5rem;
     background-color: #fff;
     color: var(--background-color);
-    transition: 0.3s;
 }
 
 .shopping-cart.active {
@@ -206,7 +214,7 @@ footer {
 	align-items: center;
     position: relative;
     bottom: 0;
-    width: 100vw
+    width: 100%;
 }
 
 footer .payment {
@@ -259,7 +267,6 @@ footer div {
         background-color: rgba(1, 1, 1, 0.8);
         width: 30rem;
         height: 100vh;
-        transition: 0.3s;
 
     }
 
@@ -301,5 +308,24 @@ footer div {
 
     html {
         font-size: 55%;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .navbar .navbar-nav a::after {
+        transition: transform 0.3s linear;
+    }
+
+    .navbar .search-form {
+        transition: transform 0.3s;
+    }
+
+    .shopping-cart,
+    .navbar .navbar-nav {
+        transition: right 0.3s;
     }
 }

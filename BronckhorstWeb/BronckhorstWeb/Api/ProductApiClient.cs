@@ -44,4 +44,16 @@ public class ProductApiClient
         return await response.Content.ReadFromJsonAsync<IReadOnlyList<T>>()
                ?? throw new InvalidOperationException("The API returned an empty response.");
     }
+
+    public async Task<PageResult<ProductGroupDto>> GetProductGroupsAsync(ProductFilters productFilters)
+    {
+        ArgumentNullException.ThrowIfNull(productFilters);
+        using var response = await _httpClient.PostAsJsonAsync("api/v1/Product/GetProductGroups", productFilters);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<PageResult<ProductGroupDto>>()
+               ?? throw new InvalidOperationException("The product API returned an empty response.");
+    }
+
+    public Task<IReadOnlyList<ProductDto>> GetProductsByCodeAsync(string productCode)
+        => GetCollectionAsync<ProductDto>("api/v1/Product/GetProductsByCode?productCode=" + Uri.EscapeDataString(productCode));
 }

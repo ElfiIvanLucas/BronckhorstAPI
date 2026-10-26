@@ -28,4 +28,17 @@ public class ProductMapperTests
         // Assert
         Assert.Equivalent(expectedProductDtoResult, result);
     }
+
+    [Fact]
+    public void MapToDto_PreservesProductCodeAndDimensions()
+    {
+        var product = ProductHelper.CreateProductEntity();
+        product.ProductCode = "LAL";
+        product.Dimensions = "10 x 2 mm";
+
+        var result = _productDtoMapper.MapToDto(product);
+
+        Assert.Equal("LAL", result.ProductCode);
+        Assert.Equal("10 x 2 mm", result.Dimensions);
+    }
 }

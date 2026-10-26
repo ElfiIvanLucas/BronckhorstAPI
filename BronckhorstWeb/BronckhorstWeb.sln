@@ -5,12 +5,18 @@ VisualStudioVersion = 17.14.37411.7 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstWeb", "BronckhorstWeb\BronckhorstWeb.csproj", "{22C866B5-86A3-487E-A4CB-437DB9310009}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BronckhorstWeb.Tests", "BronckhorstWeb.Tests\BronckhorstWeb.Tests.csproj", "{C78BC8E4-598F-4EA4-A93B-DA23FC72AB26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C78BC8E4-598F-4EA4-A93B-DA23FC72AB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C78BC8E4-598F-4EA4-A93B-DA23FC72AB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C78BC8E4-598F-4EA4-A93B-DA23FC72AB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C78BC8E4-598F-4EA4-A93B-DA23FC72AB26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{22C866B5-86A3-487E-A4CB-437DB9310009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{22C866B5-86A3-487E-A4CB-437DB9310009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22C866B5-86A3-487E-A4CB-437DB9310009}.Release|Any CPU.ActiveCfg = Release|Any CPU

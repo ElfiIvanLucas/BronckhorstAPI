@@ -6,7 +6,7 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/styles/product.css" />
+    <link rel="stylesheet" href="~/styles/product.css" asp-append-version="true" />
 }
 
 <section class="catalog">
@@ -23,7 +23,7 @@
             </div>
 
             <label asp-for="Name">Zoeken</label>
-            <input asp-for="Name" type="search" placeholder="Productnaam of artikelcode" />
+            <input asp-for="Name" type="search" placeholder="Productnaam, artikelcode of productcode" />
 
             <label asp-for="BrandId">Merk</label>
             <select asp-for="BrandId">
@@ -35,37 +35,22 @@
             </select>
 
             <label asp-for="ParentCategoryId">Hoofdcategorie</label>
-            <select asp-for="ParentCategoryId" onchange="this.form.submit()">
+            <select asp-for="ParentCategoryId" aria-controls="CategoryId">
                 <option value="">Kies een hoofdcategorie</option>
-                @foreach (var category in Model.ParentCategories)
+                @foreach (var category in Model.GetParentCategories())
                 {
                     <option value="@category.Id">@(category.TranslatedName ?? category.Name)</option>
                 }
             </select>
 
-            @if (Model.ParentCategoryId.HasValue)
-            {
-                <label asp-for="CategoryId">Subcategorie</label>
-                <select asp-for="CategoryId">
-                    <option value="">Alle subcategorieën</option>
-                    @foreach (var category in Model.SubCategories)
-                    {
-                        <option value="@category.Id">@(category.TranslatedName ?? category.Name)</option>
-                    }
-                </select>
-            }
-
-            <fieldset class="price-filter">
-                <legend>Prijs</legend>
-                <div>
-                    <label asp-for="MinPrice">Vanaf</label>
-                    <input asp-for="MinPrice" type="number" min="0" step="0.01" inputmode="decimal" />
-                </div>
-                <div>
-                    <label asp-for="MaxPrice">Tot</label>
-                    <input asp-for="MaxPrice" type="number" min="0" step="0.01" inputmode="decimal" />
-                </div>
-            </fieldset>
+            <label asp-for="CategoryId">Subcategorie</label>
+            <select asp-for="CategoryId" disabled="@(!Model.ParentCategoryId.HasValue)">
+                <option value="">@(Model.ParentCategoryId.HasValue ? "Alle subcategorieën" : "Kies eerst een hoofdcategorie")</option>
+                @foreach (var category in Model.GetSubCategories())
+                {
+                    <option value="@category.Id">@(category.TranslatedName ?? category.Name)</option>
+                }
+            </select>
 
             <input type="hidden" name="CurrentPage" value="1" />
             <button type="submit" class="filter-submit">Toepassen</button>
@@ -73,13 +58,13 @@
 
         <div class="catalog-results">
             <div class="catalog-controls">
-                <p>@Model.Products.TotalCount producten</p>
+                <p>@Model.Products.TotalCount @(Model.Products.TotalCount == 1 ? "productcode" : "productcodes")</p>
                 <div class="catalog-selects">
                     <label>
                         Sortering
                         <select asp-for="Sort" onchange="this.form.submit()">
-                            <option value="@ProductSort.NameAsc">Naam, A-Z</option>
-                            <option value="@ProductSort.NameDesc">Naam, Z-A</option>
+                            <option value="@ProductSort.NameAsc">Productcode, A-Z</option>
+                            <option value="@ProductSort.NameDesc">Productcode, Z-A</option>
                             <option value="@ProductSort.PriceAsc">Prijs, laag naar hoog</option>
                             <option value="@ProductSort.PriceDesc">Prijs, hoog naar laag</option>
                         </select>
@@ -108,7 +93,7 @@
                 <div class="product-grid">
                     @foreach (var product in Model.Products.Items)
                     {
-                        <article class="product-card">
+                        <a class="product-card" asp-page="/Product" asp-route-ProductCode="@product.ProductCode" asp-route-ReturnUrl="@(Request.Path + Request.QueryString)">
                             <div class="product-image">
                                 @if (string.IsNullOrWhiteSpace(product.Image))
                                 {
@@ -116,26 +101,22 @@
                                 }
                                 else
                                 {
-                                    <img src="~/images/ProductImages/@(product.Image).png" alt="@product.Name" />
+                                    <img src="~/images/ProductImages/@(product.Image).png" alt="@product.ProductCode" loading="lazy" />
                                 }
                             </div>
                             <div class="product-content">
-                                <p class="product-code">@product.ArtikelCode</p>
-                                <h2>@product.Name</h2>
-                                @if (!string.IsNullOrWhiteSpace(product.Description))
-                                {
-                                    <p class="product-description">@product.Description</p>
-                                }
-                                <p class="product-price">@product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("nl-NL"))</p>
+                                <h2>@(string.IsNullOrEmpty(product.ProductCode) ? "Zonder productcode" : product.ProductCode)</h2>
+                                <p class="product-description">@product.ProductCount @(product.ProductCount == 1 ? "product" : "producten")</p>
+                                <p class="product-price">Vanaf @product.FromPrice.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("nl-NL"))</p>
                             </div>
-                        </article>
+                        </a>
                     }
                 </div>
 
                 <nav class="pagination" aria-label="Paginanavigatie">
                     @if (Model.HasPreviousPage)
                     {
-                        <a asp-page="/OnzeProducten" asp-route-CurrentPage="@(Model.Products.Page - 1)" asp-route-BrandId="@Model.BrandId" asp-route-ParentCategoryId="@Model.ParentCategoryId" asp-route-CategoryId="@Model.CategoryId" asp-route-MinPrice="@Model.MinPrice" asp-route-MaxPrice="@Model.MaxPrice" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Vorige</a>
+                        <a asp-page="/OnzeProducten" asp-route-CurrentPage="@(Model.Products.Page - 1)" asp-route-BrandId="@Model.BrandId" asp-route-ParentCategoryId="@Model.ParentCategoryId" asp-route-CategoryId="@Model.CategoryId" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Vorige</a>
                     }
                     else
                     {
@@ -144,7 +125,7 @@
                     <span>Pagina @Model.Products.Page van @Model.TotalPages</span>
                     @if (Model.HasNextPage)
                     {
-                        <a asp-page="/OnzeProducten" asp-route-CurrentPage="@(Model.Products.Page + 1)" asp-route-BrandId="@Model.BrandId" asp-route-ParentCategoryId="@Model.ParentCategoryId" asp-route-CategoryId="@Model.CategoryId" asp-route-MinPrice="@Model.MinPrice" asp-route-MaxPrice="@Model.MaxPrice" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Volgende</a>
+                        <a asp-page="/OnzeProducten" asp-route-CurrentPage="@(Model.Products.Page + 1)" asp-route-BrandId="@Model.BrandId" asp-route-ParentCategoryId="@Model.ParentCategoryId" asp-route-CategoryId="@Model.CategoryId" asp-route-Name="@Model.Name" asp-route-PageSize="@Model.PageSize" asp-route-Sort="@Model.Sort">Volgende</a>
                     }
                     else
                     {
@@ -155,3 +136,8 @@
         </div>
     </form>
 </section>
+
+@section Scripts {
+    <script id="catalog-categories" type="application/json">@Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Categories))</script>
+    <script src="~/js/catalog.js" asp-append-version="true"></script>
+}

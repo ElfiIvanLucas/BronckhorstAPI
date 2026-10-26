@@ -158,7 +158,6 @@ public class ProductRepositoryTests
     public static TheoryData<ProductFilters, int> ProductFilterData =>
     [
         (new ProductFilters { BrandId = 1, Page = 1, PageSize = 10 }, 3),
-        (new ProductFilters { MinPrice = 50, MaxPrice = 50, Page = 1, PageSize = 10 }, 3),
         (new ProductFilters { Name = "Desk", Page = 1, PageSize = 10 }, 3)
     ];
 
@@ -169,4 +168,92 @@ public class ProductRepositoryTests
         (ProductSort.PriceAsc, 1),
         (ProductSort.PriceDesc, 2)
     ];
+
+    [Fact]
+    public async Task GetProductGroups_GroupsBeforePaging_AndSearchesByProductCode()
+    {
+        using var context = DbContextHelper.CreateInMemoryDbContext();
+        context.Products.AddRange(
+            new Product { Id = 3, ProductCode = "LAL", Name = "Z", Price = 30, Image = "lal" },
+            new Product { Id = 4, ProductCode = "LAL", Name = "A", Price = 20 },
+            new Product { Id = 5, ProductCode = "LAX", Name = "B", Price = 10 });
+        await context.SaveChangesAsync(TestContext.Current.CancellationToken);
+        var repository = new ProductRepository(context);
+
+        var firstPage = await repository.GetProductGroupsAsync(new ProductFilters { Name = "LA", PageSize = 1 });
+        var secondPage = await repository.GetProductGroupsAsync(new ProductFilters { Name = "LA", PageSize = 1, Page = 2 });
+
+        var group = Assert.Single(firstPage.Items);
+        Assert.Equal("LAL", group.ProductCode);
+        Assert.Equal(2, group.ProductCount);
+        Assert.Equal(20, group.FromPrice);
+        Assert.Equal("lal", group.Image);
+        Assert.Equal(2, firstPage.TotalCount);
+        Assert.Equal("LAX", Assert.Single(secondPage.Items).ProductCode);
+    }
+
+    [Theory]
+    [InlineData(ProductSort.NameAsc, "LAL")]
+    [InlineData(ProductSort.NameDesc, "LAX")]
+    [InlineData(ProductSort.PriceAsc, "LAX")]
+    [InlineData(ProductSort.PriceDesc, "LAL")]
+    public async Task GetProductGroups_SortsByCodeOrStartingPrice(ProductSort sort, string expectedCode)
+    {
+        using var context = DbContextHelper.CreateInMemoryDbContext();
+        context.Products.AddRange(
+            new Product { Id = 3, ProductCode = "LAL", Name = "Z", Price = 30 },
+            new Product { Id = 4, ProductCode = "LAX", Name = "A", Price = 10 });
+        await context.SaveChangesAsync(TestContext.Current.CancellationToken);
+
+        var result = await new ProductRepository(context).GetProductGroupsAsync(new ProductFilters { Name = "LA", Sort = sort });
+
+        Assert.Equal(expectedCode, result.Items.First().ProductCode);
+    }
+
+    [Theory]
+    [InlineData(10, null, null, 2)]
+    [InlineData(10, 11, null, 1)]
+    [InlineData(20, 11, null, 0)]
+    [InlineData(10, null, 2, 1)]
+    public async Task GetProductGroups_CombinesParentChildBrandAndSearchFilters(int parentId, int? categoryId, int? brandId, int expectedCount)
+    {
+        using var context = DbContextHelper.CreateInMemoryDbContext();
+        context.Categories.AddRange(
+            new Category { Id = 10 }, new Category { Id = 20 },
+            new Category { Id = 11, ParentId = 10 }, new Category { Id = 12, ParentId = 10 },
+            new Category { Id = 21, ParentId = 20 });
+        context.Products.AddRange(
+            new Product { Id = 3, ProductCode = "LAL", ArtikelCode = "FIND-1", BrandId = 1 },
+            new Product { Id = 4, ProductCode = "LAX", ArtikelCode = "FIND-2", BrandId = 2 },
+            new Product { Id = 5, ProductCode = "OTHER", BrandId = 1 });
+        context.ProductCategories.AddRange(
+            new ProductCategory { ProductId = 3, CategoryId = 11 },
+            new ProductCategory { ProductId = 4, CategoryId = 12 },
+            new ProductCategory { ProductId = 5, CategoryId = 21 });
+        await context.SaveChangesAsync(TestContext.Current.CancellationToken);
+
+        var result = await new ProductRepository(context).GetProductGroupsAsync(new ProductFilters
+        {
+            ParentCategoryId = parentId, CategoryId = categoryId, BrandId = brandId, Name = "FIND"
+        });
+
+        Assert.Equal(expectedCount, result.TotalCount);
+    }
+
+    [Fact]
+    public async Task GetProductsByCode_ReturnsEveryVariantInIdOrder_AndMatchesExactCode()
+    {
+        using var context = DbContextHelper.CreateInMemoryDbContext();
+        context.Products.AddRange(Enumerable.Range(3, 20).Select(id => new Product
+        {
+            Id = id, ProductCode = "LAL", Dimensions = id % 2 == 0 ? "10" : "2"
+        }));
+        context.Products.Add(new Product { Id = 23, ProductCode = "LAL-OTHER" });
+        await context.SaveChangesAsync(TestContext.Current.CancellationToken);
+
+        var result = await new ProductRepository(context).GetProductsByCodeAsync("LAL");
+
+        Assert.Equal(Enumerable.Range(3, 20), result.Select(product => product.Id));
+        Assert.All(result, product => Assert.Equal("LAL", product.ProductCode));
+    }
 }

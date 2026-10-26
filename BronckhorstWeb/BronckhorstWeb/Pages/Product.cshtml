@@ -1,0 +1,98 @@
+@page
+@model ProductModel
+@{
+    ViewData["Title"] = Model.ProductCode ?? "Product";
+    var product = Model.SelectedProduct;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/styles/product.css" asp-append-version="true" />
+}
+
+<section class="catalog product-detail">
+    <nav class="product-breadcrumb" aria-label="Broodkruimelpad">
+        <a href="@(Url.IsLocalUrl(Model.ReturnUrl) ? Model.ReturnUrl : Url.Page("/OnzeProducten"))">Terug naar het overzicht</a>
+        <span aria-hidden="true">/</span>
+        <span>@(Model.ProductCode ?? "Zonder productcode")</span>
+    </nav>
+
+    @if (Model.LoadError is not null)
+    {
+        <p class="catalog-message" role="alert">@Model.LoadError</p>
+    }
+    else if (product is null)
+    {
+        <h1>Productcode niet gevonden</h1>
+        <p class="catalog-message">Er zijn geen producten gevonden voor deze productcode.</p>
+    }
+    else
+    {
+        <div class="product-detail-layout">
+            <div class="product-main-image">
+                @if (string.IsNullOrWhiteSpace(product.Image))
+                {
+                    <img src="~/images/implant.png" alt="@product.Name" />
+                }
+                else
+                {
+                    <img src="~/images/ProductImages/@(product.Image).png" alt="@product.Name" />
+                }
+            </div>
+
+            <div class="product-selection">
+                <p class="catalog-eyebrow">Jansdijk Implant Solutions</p>
+                <h1>@(Model.ProductCode ?? "Zonder productcode")</h1>
+
+                <section class="variant-section" aria-labelledby="dimension-heading">
+                    <h2 id="dimension-heading">Dimensies <span>@(string.IsNullOrEmpty(Model.Dimension) ? "Niet opgegeven" : Model.Dimension)</span></h2>
+                    <div class="dimension-options">
+                        @foreach (var dimension in Model.Dimensions)
+                        {
+                            <a asp-page="/Product" asp-all-route-data="Model.SelectionRouteValues(dimension)"
+                               class="dimension-option @(dimension == Model.Dimension ? "is-selected" : "")"
+                               aria-current="@(dimension == Model.Dimension ? "true" : null)">
+                                @(string.IsNullOrEmpty(dimension) ? "Niet opgegeven" : dimension)
+                            </a>
+                        }
+                    </div>
+                </section>
+
+                <section class="variant-section" aria-labelledby="variant-heading">
+                    <h2 id="variant-heading">Product <span>@product.ArtikelCode</span></h2>
+                    <div class="variant-options">
+                        @foreach (var variant in Model.Variants)
+                        {
+                            <a asp-page="/Product" asp-all-route-data="Model.SelectionRouteValues(Model.Dimension!, variant.Id)"
+                               class="variant-option @(variant.Id == product.Id ? "is-selected" : "")"
+                               aria-current="@(variant.Id == product.Id ? "true" : null)">
+                                @if (string.IsNullOrWhiteSpace(variant.Image))
+                                {
+                                    <img src="~/images/implant.png" alt="" />
+                                }
+                                else
+                                {
+                                    <img src="~/images/ProductImages/@(variant.Image).png" alt="" />
+                                }
+                                <span>@variant.ArtikelCode</span>
+                            </a>
+                        }
+                    </div>
+                </section>
+
+                <section class="selected-product" aria-labelledby="product-name">
+                    <h2 id="product-name">@product.Name</h2>
+                    <dl class="product-specifications">
+                        <dt>Artikelcode</dt><dd>@product.ArtikelCode</dd>
+                        <dt>Productcode</dt><dd>@(Model.ProductCode ?? "Niet opgegeven")</dd>
+                        <dt>Dimensies</dt><dd>@(string.IsNullOrEmpty(product.Dimensions) ? "Niet opgegeven" : product.Dimensions)</dd>
+                    </dl>
+                    @if (!string.IsNullOrWhiteSpace(product.Description))
+                    {
+                        <p class="product-detail-description">@product.Description</p>
+                    }
+                    <p class="product-detail-price">@product.Price.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("nl-NL"))</p>
+                </section>
+            </div>
+        </div>
+    }
+</section>

@@ -4,11 +4,9 @@ public class ProductFilters
 {
     public int? BrandId { get; init; }
 
+    public int? ParentCategoryId { get; init; }
+
     public int? CategoryId { get; init; }
-
-    public decimal? MinPrice { get; init; }
-
-    public decimal? MaxPrice { get; init; }
 
     public string? Name { get; init; }
 

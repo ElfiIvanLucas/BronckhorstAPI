@@ -83,7 +83,7 @@ shoppingCartButton.onclick = (event) => {
 
 
 document.addEventListener("click", function (e) {
-    const clickedCtgMenu = ctgMenu && ctgMenu.contains(e.target);
+    const clickedCtgMenu = ctgMenu?.contains(e.target);
 
     if (!menu.contains(e.target) && !clickedCtgMenu && !navMenu.contains(e.target)) {
         navMenu.classList.remove("active");

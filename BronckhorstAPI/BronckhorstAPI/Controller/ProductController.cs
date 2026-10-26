@@ -61,6 +61,37 @@ public class ProductController : ApiControllerBase
         }
     }
 
+    [HttpPost("GetProductGroups")]
+    [ProducesResponseType(typeof(PageResult<ProductGroupDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetProductGroupsAsync([FromBody] ProductFilters productFilters)
+    {
+        try
+        {
+            return Ok(await _productService.GetProductGroupsAsync(productFilters));
+        }
+        catch (Exception exception)
+        {
+            return HandleException(exception);
+        }
+    }
+
+    [HttpGet("GetProductsByCode")]
+    [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetProductsByCodeAsync([FromQuery] string? productCode)
+    {
+        try
+        {
+            return Ok(await _productService.GetProductsByCodeAsync(productCode ?? string.Empty));
+        }
+        catch (Exception exception)
+        {
+            return HandleException(exception);
+        }
+    }
+
     [HttpGet]
     [Route("GetProductById/{productId:int}")]
     [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]

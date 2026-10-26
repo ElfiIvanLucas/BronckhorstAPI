@@ -2,7 +2,7 @@ using BronckhorstWeb.Api;
 
 namespace BronckhorstWeb;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {
@@ -28,6 +28,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+        // Also serve product images copied into wwwroot after the application was built.
+        app.UseStaticFiles();
 
         app.UseRouting();
 

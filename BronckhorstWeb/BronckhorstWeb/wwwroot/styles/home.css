@@ -140,7 +140,6 @@
 	justify-content: center;
 	align-items: center;
 	border-radius: 50%;
-	transition: background-color 0.3s, color 0.3s;
 }
 
 .products .product-icons a:hover {
@@ -187,7 +186,6 @@
     min-height: fit-content;
     max-height: fit-content;
     position: relative;
-    animation: animateModal 0.5s;
 }
 
 /* modal animation */
@@ -249,4 +247,14 @@
 	padding-top: 50px;
 	padding-bottom: 50px;
 	object-fit: contain;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.products .product-icons a {
+		transition: background-color 0.3s, color 0.3s;
+	}
+
+	.modal-container {
+		animation: animateModal 0.5s;
+	}
 }
